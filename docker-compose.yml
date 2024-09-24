@@ -13,7 +13,7 @@ services:
 
   app:
     build:
-      context: .
+      context: ./app
     ports:
       - 8004:8004
     volumes:
