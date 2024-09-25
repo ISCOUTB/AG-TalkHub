@@ -27,6 +27,14 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  frontend:
+    build:
+      context: ./talkhub_frontend
+    ports:
+      - 3000:80
+    volumes:
+      - ./talkhub_frontend/dist:/talkhub_frontend/dist
+
 volumes:
   postgres_data:
   app:
