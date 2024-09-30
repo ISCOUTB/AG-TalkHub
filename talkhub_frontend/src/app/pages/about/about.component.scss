@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12;
+}
+
+.heading {
+  @apply text-5xl font-bold text-center mb-8;
+  color: $color-accent;
+}
+
+.subheading {
+  @apply text-lg text-accent text-center mb-12;
+}
+
+.profile-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+}
+
+.card {
+  background-color: $color-accent;
+  @apply rounded-lg shadow-md p-6 transition-colors duration-300;
+}

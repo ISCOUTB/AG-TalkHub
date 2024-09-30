@@ -1,0 +1,185 @@
+<div
+  [class.w-64]="!isCollapsed"
+  [class.w-14]="isCollapsed"
+  class="h-screen bg-primary text-accent transition-all duration-300"
+>
+  <!-- Header -->
+  <div
+    class="flex items-center"
+    [ngClass]="{
+      'justify-center w-full p-0': isCollapsed,
+      'justify-between p-4': !isCollapsed
+    }"
+  >
+    <div *ngIf="!isCollapsed" class="text-lg font-semibold">TalkHub</div>
+    <button (click)="toggleMenu()" class="text-accent focus:outline-none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="orange"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+    </button>
+  </div>
+  <nav class="mt-8">
+    <ul class="space-y-4">
+      <li>
+        <button
+          class="w-full text-left px-4 py-2 hover:bg-gray-700 rounded flex items-center"
+          onclick="window.location.href='/'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="orange"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+
+          <span *ngIf="!isCollapsed" class="ml-2 text-accent">Home</span>
+        </button>
+      </li>
+      <li>
+        <button
+          class="w-full text-left px-4 py-2 hover:bg-gray-700 rounded flex items-center"
+          onclick="window.location.href='/popular'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="orange"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
+            />
+          </svg>
+
+          <span *ngIf="!isCollapsed" class="ml-2 text-accent"
+            >Popular (WIP)</span
+          >
+        </button>
+      </li>
+      <li>
+        <button
+          class="w-full text-left px-4 py-2 hover:bg-gray-700 rounded flex items-center"
+          onclick="window.location.href='/about'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="orange"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+            />
+          </svg>
+
+          <span *ngIf="!isCollapsed" class="ml-2 text-accent">About</span>
+        </button>
+      </li>
+      <li>
+        <button
+          class="w-full text-left px-4 py-2 hover:bg-gray-700 rounded flex items-center"
+          onclick="window.location.href='/rules'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="orange"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.242 5.992h12m-12 6.003H20.24m-12 5.999h12M4.117 7.495v-3.75H2.99m1.125 3.75H2.99m1.125 0H5.24m-1.92 2.577a1.125 1.125 0 1 1 1.591 1.59l-1.83 1.83h2.16M2.99 15.745h1.125a1.125 1.125 0 0 1 0 2.25H3.74m0-.002h.375a1.125 1.125 0 0 1 0 2.25H2.99"
+            />
+          </svg>
+
+          <span *ngIf="!isCollapsed" class="ml-2 text-accent">Rules</span>
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="w-full text-left px-4 py-2 hover:bg-gray-700 rounded flex items-center"
+          onclick="window.location.href='/faq'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="orange"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"
+            />
+          </svg>
+
+          <span *ngIf="!isCollapsed" class="ml-2 text-accent">FAQ</span>
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="w-full text-left px-4 py-2 hover:bg-gray-700 rounded flex items-center"
+          onclick="window.location.href='/newdiscussion'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="orange"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+
+          <span *ngIf="!isCollapsed" class="ml-2 text-accent"
+            >New Discussion</span
+          >
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
