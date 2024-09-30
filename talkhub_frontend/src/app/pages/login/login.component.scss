@@ -1,0 +1,83 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+
+  // Sección izquierda: formulario de login
+  .left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+
+    .login-form {
+      padding: 40px;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+      .title {
+        font-weight: bold;
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+      .input-field {
+        margin-bottom: 15px;
+        input {
+          width: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+        }
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #d6ff00;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .separator {
+        margin: 20px 0;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .signup-link {
+        text-align: center;
+        margin-top: 20px;
+        a {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  // Sección derecha: Talkhub
+  .right-section {
+    flex: 1;
+    background-color: #d7ff00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+    }
+  }
+}
+
