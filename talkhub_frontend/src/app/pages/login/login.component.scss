@@ -1,8 +1,9 @@
+@import '../../../styles.scss';
+
 .login-container {
   display: flex;
   height: 100vh;
 
-  // Sección izquierda: formulario de login
   .left-section {
     flex: 1;
     display: flex;
@@ -42,7 +43,8 @@
       .login-btn {
         width: 100%;
         padding: 10px;
-        background-color: #d6ff00;
+        background-color: $color-accent;
+        color: $color-primary;
         font-weight: bold;
         border: none;
         cursor: pointer;
@@ -65,14 +67,13 @@
     }
   }
 
-  // Sección derecha: Talkhub
   .right-section {
     flex: 1;
-    background-color: #d7ff00;
+    background-color: $color-accent;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: $color-primary;
 
     h1 {
       font-size: 48px;
