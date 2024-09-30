@@ -1,61 +1,102 @@
 <div class="register-container">
-  <!-- Sección izquierda: formulario de registro -->
   <div class="left-section">
     <div class="register-form">
-      <h1 class="title">Get Started Now</h1>
+      <h1 class="title text-accent">Get Started Now</h1>
       <form (submit)="onSubmit($event)">
-
+        <!-- Name Field -->
         <div class="input-field">
-          <input type="text" id="name" placeholder="Name" required minlength="6" />
-          <div *ngIf="name.invalid && name.touched" class="error-message">
+          <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            required
+            minlength="6"
+            #nameInput
+          />
+          <div
+            *ngIf="nameInput.value.length < 6 && nameInput.value !== ''"
+            class="error-message"
+          >
             Name must be at least 6 characters long.
           </div>
         </div>
 
+        <!-- Email Field -->
         <div class="input-field">
-          <input type="email" placeholder="Email address" required />
+          <input type="email" placeholder="Email address" required #emailInput />
         </div>
 
+        <!-- Password Field -->
         <div class="input-field">
-          <input type="password" id="password" placeholder="Password" required minlength="6" />
-          <div *ngIf="password.invalid && password.touched" class="error-message">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+            minlength="6"
+            #passwordInput
+          />
+          <div
+            *ngIf="passwordInput.value.length < 6 && passwordInput.value !== ''"
+            class="error-message"
+          >
             Password must be at least 6 characters long.
           </div>
         </div>
 
-        <!-- Campo para Confirm Password -->
+        <!-- Confirm Password Field -->
         <div class="input-field">
-          <input type="password" id="confirmPassword" placeholder="Confirm Password" required minlength="6"/>
-          <div *ngIf="confirmPassword.invalid && confirmPassword.touched" class="error-message">
-            Passwords must match.
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+            minlength="6"
+            #confirmPasswordInput
+          />
+          <div
+            *ngIf="
+              confirmPasswordInput.value.length < 6 &&
+              confirmPasswordInput.value !== ''
+            "
+            class="error-message"
+          >
+            Confirm Password must be at least 6 characters long.
           </div>
-          <div *ngIf="password.value !== confirmPassword.value && confirmPassword.touched" class="error-message">
+          <div
+            *ngIf="
+              passwordInput.value !== confirmPasswordInput.value &&
+              confirmPasswordInput.value !== ''
+            "
+            class="error-message"
+          >
             Passwords must match.
           </div>
         </div>
 
+        <!-- Terms and Conditions -->
         <div class="terms">
-          <input type="checkbox" id="terms" required />
-          <label for="terms">I agree to the <a href="#">terms & policy</a></label>
+          <input type="checkbox" id="terms" required #termsInput />
+          <label class="text-primary" for="terms">
+            I agree to the <a href="#">terms &amp; policy</a>
+          </label>
         </div>
 
-        <button type="submit" class="signup-btn">Sign up</button>
+        <!-- Submit Button -->
+        <button type="submit" class="signup-btn text-primary">Sign up</button>
       </form>
 
       <div class="separator">or</div>
       <div class="signin-link">
-        <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+        <p class="text-primary" >
+          Already have an account?
+          <a href="/login">Sign in</a>
+        </p>
       </div>
     </div>
   </div>
 
-  <!-- Sección derecha: Talkhub -->
   <div class="right-section">
-    <h1>Talkhub</h1>
+    <h1 class="text-primary">Talkhub</h1>
   </div>
 </div>
-
-
-
-
-
