@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+.threads-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    background-color: $color-primary;
+}
+.thread {
+    border: 2px solid darken($color-primary, 10%);
+    padding: 16px;
+    border-radius: 8px;
+    background-color: $color-primary;
+}
+.thread-card {
+    &:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease-in-out;
+    }
+}
+.card-header h2 {
+color: $color-accent;
+}
+
+.card-content p {
+color: $color-primary;
+}
+
+.card-footer .btn-primary {
+margin-top: auto;
+}

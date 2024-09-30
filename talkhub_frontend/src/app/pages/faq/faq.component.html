@@ -1,0 +1,53 @@
+<div class="max-w-2xl mx-auto my-8 p-6 bg-white rounded shadow">
+    <h1 class="text-4xl font-bold mb-6 text-center">Frequently Asked Questions</h1>
+    <div class="space-y-4">
+      <div
+        *ngFor="let faq of faqs; index as i"
+        class="border-b border-gray-200 pb-4"
+      >
+        <button
+          (click)="toggleFAQ(i)"
+          class="w-full text-left flex items-center justify-between focus:outline-none"
+        >
+          <span class="text-xl font-semibold text-accent">{{ faq.question }}</span>
+          <svg
+            *ngIf="!faq.isOpen"
+            class="h-6 w-6 text-primary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <!-- Plus Icon -->
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+          <svg
+            *ngIf="faq.isOpen"
+            class="h-6 w-6 text-primary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <!-- Minus Icon -->
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20 12H4"
+            />
+          </svg>
+        </button>
+        <div
+          *ngIf="faq.isOpen"
+          class="mt-2 text-primary"
+        >
+          {{ faq.answer }}
+        </div>
+      </div>
+    </div>
+  </div>
+  

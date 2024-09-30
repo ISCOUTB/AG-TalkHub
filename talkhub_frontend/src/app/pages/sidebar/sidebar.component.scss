@@ -1,0 +1,31 @@
+@import '../../../styles.scss';
+
+:host {
+  @apply h-screen transition-all duration-300;
+}
+
+.sidebar {
+  &.expanded {
+    width: 16rem;
+  }
+  &.collapsed {
+    width: 5rem;
+  }
+  background-color: $color-primary;
+  color: $color-base-100;
+}
+
+.menu-item {
+  @apply flex items-center p-2 rounded transition-colors duration-300;
+  &:hover {
+    background-color: $color-primary;
+  }
+}
+
+.menu-icon {
+  @apply h-6 w-6 text-base-100;
+}
+
+.menu-text {
+  @apply ml-3;
+}

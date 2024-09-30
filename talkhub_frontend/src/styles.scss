@@ -1,4 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Variables */
+$color-primary: #1F2937;       
+$color-secondary: #3B82F6;     
+$color-accent: #F59E0B;      
+$color-neutral: #9CA3AF;
+$color-base-100: #FFFFFF;
+$color-base-200: #F9FAFB;
+
+.btn-primary {
+  @apply bg-primary text-base-100 font-medium py-2 px-4 rounded shadow;
+  &:hover {
+    background-color: $color-primary;
+  }
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+/* Base styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: $color-base-200;
+  color: $color-neutral;
+  @apply transition-colors duration-300;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: $color-neutral;
+  @apply font-semibold;
+}
+
+/* Links */
+a {
+  color: $color-secondary;
+  &:hover {
+    color: lighten($color-secondary, 10%);
+  }
+  transition: color 0.3s ease-in-out;
+}
+
+/* Buttons */
+button {
+    background-color: $color-primary;
+    color: $color-base-100;
+    @apply font-medium py-2 px-4 rounded shadow;
+    &:hover {
+        background-color: darken($color-primary, 10%);
+    }
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+
+/* Card component */
+.card {
+  @apply bg-base-100 dark:bg-gray-800 rounded-lg shadow-md p-6 flex flex-col;
+  @apply transition-transform duration-300;
+}
