@@ -19,6 +19,7 @@ export const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,

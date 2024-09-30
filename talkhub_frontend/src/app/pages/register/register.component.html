@@ -1,1 +1,61 @@
-<p>register works!</p>
+<div class="register-container">
+  <!-- Sección izquierda: formulario de registro -->
+  <div class="left-section">
+    <div class="register-form">
+      <h1 class="title">Get Started Now</h1>
+      <form (submit)="onSubmit($event)">
+
+        <div class="input-field">
+          <input type="text" id="name" placeholder="Name" required minlength="6" />
+          <div *ngIf="name.invalid && name.touched" class="error-message">
+            Name must be at least 6 characters long.
+          </div>
+        </div>
+
+        <div class="input-field">
+          <input type="email" placeholder="Email address" required />
+        </div>
+
+        <div class="input-field">
+          <input type="password" id="password" placeholder="Password" required minlength="6" />
+          <div *ngIf="password.invalid && password.touched" class="error-message">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+
+        <!-- Campo para Confirm Password -->
+        <div class="input-field">
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required minlength="6"/>
+          <div *ngIf="confirmPassword.invalid && confirmPassword.touched" class="error-message">
+            Passwords must match.
+          </div>
+          <div *ngIf="password.value !== confirmPassword.value && confirmPassword.touched" class="error-message">
+            Passwords must match.
+          </div>
+        </div>
+
+        <div class="terms">
+          <input type="checkbox" id="terms" required />
+          <label for="terms">I agree to the <a href="#">terms & policy</a></label>
+        </div>
+
+        <button type="submit" class="signup-btn">Sign up</button>
+      </form>
+
+      <div class="separator">or</div>
+      <div class="signin-link">
+        <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección derecha: Talkhub -->
+  <div class="right-section">
+    <h1>Talkhub</h1>
+  </div>
+</div>
+
+
+
+
+
