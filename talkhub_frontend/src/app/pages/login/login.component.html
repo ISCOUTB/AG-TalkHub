@@ -1,41 +1,46 @@
 <div class="login-container">
-  <!-- Sección izquierda: formulario de login -->
   <div class="left-section">
     <div class="login-form">
-      <h1 class="title">Welcome back!</h1>
-      <p class="subtitle">Enter your Credentials to access your account</p>
+      <h1 class="title text-accent">Welcome back!</h1>
+      <p class=" text-primary subtitle">Enter your Credentials to access your account</p>
       <form>
 
         <div class="input-field">
-          <input type="email" placeholder="Email address" required />
+          <input type="email" placeholder="Email address" required #emailInput />
         </div>
 
         <div class="input-field">
-          <input type="password" id="password" placeholder="Password" required minlength="6" />
-          <div *ngIf="password.invalid && password.touched" class="error-message">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+            minlength="6"
+            #passwordInput
+          />
+          <div
+            *ngIf="passwordInput.value.length < 6 && passwordInput.value !== ''"
+            class="error-message"
+          >
             Password must be at least 6 characters long.
           </div>
         </div>
 
         <div class="remember">
           <input type="checkbox" id="remember" />
-          <label for="remember">Remember for 30 days</label>
+          <label class="text-primary" for="remember">  Remember for 30 days</label>
         </div>
 
         <button type="submit" class="login-btn">Login</button>
       </form>
       <div class="separator">or</div>
       <div class="signup-link">
-        <p>Don't have an account? <a href="/register">Sign Up</a></p>
+        <p class="text-primary" >Don't have an account? <a href="/register">Sign Up</a></p>
       </div>
     </div>
   </div>
 
-  <!-- Sección derecha: Talkhub -->
-  <div class="right-section">
-    <h1>Talkhub</h1>
+  <div class="right-section text-primary">
+    <h1 class="text-primary">Talkhub</h1>
   </div>
 </div>
-
-
-

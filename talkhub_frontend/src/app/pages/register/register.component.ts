@@ -1,27 +1,39 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  termsAccepted: boolean = false;
 
-  onSubmit(event: Event) {
-    event.preventDefault(); // Prevenir el envío del formulario
-    const form = (event.target as HTMLFormElement);
-    const passwordInput = form.querySelector('#password') as HTMLInputElement;
-    const confirmPasswordInput = form.querySelector('#confirmPassword') as HTMLInputElement;
+   onSubmit(event: Event) {
+    event.preventDefault();
 
-    // Verifica que las contraseñas coincidan
-    if (passwordInput.value !== confirmPasswordInput.value) {
+    if (this.password !== this.confirmPassword) {
       alert('Passwords must match.');
       return;
     }
 
-    // Si todo está bien, dejar que el formulario se envíe
-    console.log('Form submitted successfully!');
+    if (!this.termsAccepted) {
+      alert('You must accept the terms and policy.');
+      return;
+    }
+
+    // Proceed with form submission logic
+    console.log('Form submitted successfully!', {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+    });
   }
 }
