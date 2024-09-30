@@ -1,41 +1,39 @@
-services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_USER: yourusername
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_DB: yourdatabase
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+version: '3.8'
 
+services:
+  
   app:
     build:
       context: ./app
+    container_name: django_app
+    command: python manage.py runserver 0.0.0.0:8004
     ports:
-      - 8004:8004
+      - "8004:8004"
     volumes:
       - ./app:/app
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=your_secret_key
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+    depends_on:
+      - mongodb
 
   mongodb:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
 
   frontend:
     build:
       context: ./talkhub_frontend
+    container_name: frontend
     ports:
-      - 3000:80
+      - "3000:80"
     volumes:
       - ./talkhub_frontend/dist:/talkhub_frontend/dist
 
 volumes:
-  postgres_data:
-  app:
   mongo_data:
