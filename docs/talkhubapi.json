@@ -1,0 +1,697 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Forum Web App API",
+    "description": "API for a forum web application designed for discussions, content management, user interactions, and moderation.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.forumwebapp.com/v1"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id_category": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Thread": {
+        "type": "object",
+        "properties": {
+          "id_thread": {
+            "type": "string"
+          },
+          "id_category": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publication_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id_user": {
+            "type": "string"
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id_comment": {
+            "type": "string"
+          },
+          "id_thread": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "publication_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id_user": {
+            "type": "string"
+          }
+        }
+      },
+      "Vote": {
+        "type": "object",
+        "properties": {
+          "id_vote": {
+            "type": "string"
+          },
+          "id_comment": {
+            "type": "string"
+          },
+          "id_user": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "upvote",
+              "downvote"
+            ]
+          }
+        }
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "id_file": {
+            "type": "string"
+          },
+          "id_user": {
+            "type": "string"
+          },
+          "file_path": {
+            "type": "string",
+            "description": "Path or index of the file"
+          },
+          "id_comment": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the file (e.g., image, document, zip)"
+          }
+        }
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id_notification": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "id_user": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "string"
+          },
+          "id_role": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "user_name": {
+            "type": "string"
+          },
+          "registration_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "profile_photo": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id_role": {
+            "type": "string"
+          },
+          "role_name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Register a new user",
+        "description": "Creates a new user account with a unique email and password.",
+        "tags": [
+          "User Management"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "profile_photo": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "User login",
+        "description": "Authenticates a user using email and password.",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "JWT token for authenticated user"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "Get all categories",
+        "description": "Retrieves all discussion categories.",
+        "tags": [
+          "Content Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new category",
+        "description": "Creates a new discussion category.",
+        "tags": [
+          "Content Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/threads": {
+      "get": {
+        "summary": "Get all threads",
+        "description": "Retrieves all discussion threads, optionally filtered by category or user.",
+        "tags": [
+          "Content Management"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id_category",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by category ID"
+          },
+          {
+            "in": "query",
+            "name": "id_user",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by user ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of threads",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Thread"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new thread",
+        "description": "Creates a new discussion thread.",
+        "tags": [
+          "Content Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Thread"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Thread created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/threads/{id_thread}": {
+      "get": {
+        "summary": "Get a thread",
+        "description": "Retrieves a specific thread by its ID.",
+        "tags": [
+          "Content Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_thread",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the thread"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Thread details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Thread"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Thread not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit a thread",
+        "description": "Updates a thread's details.",
+        "tags": [
+          "Content Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_thread",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Thread"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Thread updated successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Thread not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a thread",
+        "description": "Deletes a thread.",
+        "tags": [
+          "Content Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_thread",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Thread deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Thread not found"
+          }
+        }
+      }
+    },
+    "/comments": {
+      "post": {
+        "summary": "Add a comment",
+        "description": "Adds a new comment to a thread.",
+        "tags": [
+          "Content Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment added successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/votes": {
+      "post": {
+        "summary": "Add a vote",
+        "description": "Adds an upvote or downvote to a comment.",
+        "tags": [
+          "Voting"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Vote added successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/files": {
+      "post": {
+        "summary": "Upload a file",
+        "description": "Allows a user to upload a file (image, document, etc.) related to a comment.",
+        "tags": [
+          "File Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/File"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_user": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "id_comment": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the file (e.g., image, document, zip)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "File uploaded successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "summary": "Get user notifications",
+        "description": "Retrieves notifications for a specific user.",
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id_user",
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of notifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notification"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  }
+}

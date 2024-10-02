@@ -1,16 +1,13 @@
-version: '3.8'
-
 services:
-  
   app:
     build:
-      context: ./app
-    container_name: django_app
+      context: ./
+    container_name: talkhub_backend
     command: python manage.py runserver 0.0.0.0:8004
     ports:
       - "8004:8004"
     volumes:
-      - ./app:/app
+      - ./talkhub_backend:/talkhub_backend
     environment:
       - DEBUG=1
       - SECRET_KEY=your_secret_key
