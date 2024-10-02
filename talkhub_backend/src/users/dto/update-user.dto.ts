@@ -1,4 +1,10 @@
-import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsIn,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 /**
  * This class is a data transfer object for creating a user
@@ -20,4 +26,19 @@ export class UpdateUserDto {
   @MinLength(6)
   @IsOptional()
   password: string;
+
+  /**
+   * The user's name
+   */
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  /**
+   * The user's role
+   */
+  @IsString()
+  @IsIn(['admin', 'regular', 'moderator'])
+  @IsOptional()
+  role: string;
 }

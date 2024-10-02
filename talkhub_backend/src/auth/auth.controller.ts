@@ -13,6 +13,7 @@ import { AuthGuard } from './auth.guard';
 import { Public } from './public-route.metadata';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/models/user.model';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -37,7 +38,7 @@ export class AuthController {
   @Public()
   @HttpCode(HttpStatus.CREATED)
   @Post('register')
-  async register(@Body() registerDto: User) {
+  async register(@Body() registerDto: CreateUserDto) {
     return this.userService.insert(registerDto);
   }
 }
