@@ -13,8 +13,10 @@ import { AuthGuard } from './auth.guard';
 import { Public } from './public-route.metadata';
 import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
+import { TokenDto } from './dto/token.dto';
+import { ProfileDto } from './dto/profile.dto';
 
 @ApiBearerAuth()
 @Controller('auth')
@@ -26,12 +28,16 @@ export class AuthController {
 
   @Public()
   @HttpCode(HttpStatus.OK)
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 200, description: 'Login successful', type: TokenDto })
   @Post('login')
   signIn(@Body() signInDto: LoginDto) {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
   @UseGuards(AuthGuard)
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 200, description: 'Profile data', type: ProfileDto })
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
