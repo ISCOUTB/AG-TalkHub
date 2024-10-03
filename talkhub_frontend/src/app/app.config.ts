@@ -1,22 +1,28 @@
-import { ApplicationConfig, Provider, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  Provider,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { Configuration } from './api';
 
-function provideApiModuleConfig(factory: () => Partial<Configuration>): Provider {
+function provideApiModuleConfig(
+  factory: () => Partial<Configuration>
+): Provider {
   return {
     provide: Configuration,
-    useFactory: factory
+    useFactory: factory,
   };
 }
 
 function apiConfigurationFactory() {
-  return {
+  return new Configuration({
     basePath: 'http://localhost:3000',
-    accessToken: localStorage.getItem('access_token') || ''  // Retrieve token from storage
-  };
+    accessToken: () => localStorage.getItem('access_token') || '', // Use a function to get the token
+  });
 }
 
 export const appConfig: ApplicationConfig = {
@@ -24,6 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    provideApiModuleConfig(apiConfigurationFactory)
+    provideApiModuleConfig(apiConfigurationFactory),
   ],
 };

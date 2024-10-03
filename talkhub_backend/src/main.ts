@@ -19,6 +19,8 @@ async function bootstrap() {
     jsonDocumentUrl: 'swagger/json',
   });
 
+  app.enableCors();
+
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
