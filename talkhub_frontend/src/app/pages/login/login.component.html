@@ -34,7 +34,14 @@
           </div>
         </div>
 
-        <button (click)="login()" class="login-btn">Login</button>
+        <button
+          [class.opacity-50]="loginForm.invalid"
+          [disabled]="loginForm.invalid"
+          (click)="login()"
+          class="login-btn"
+        >
+          Login
+        </button>
       </form>
       <div class="separator">or</div>
       <div class="signup-link">
