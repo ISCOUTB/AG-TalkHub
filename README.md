@@ -7,7 +7,7 @@
 ![GitHub Org's stars](https://img.shields.io/github/stars/camilafernanda?style=social)
 
 ## Descripción del Proyecto
-Talkhub es una plataforma de foros diseñada para facilitar discusiones entre usuarios en torno a temas diversos. El proyecto busca crear un espacio de conversación estructurado, donde los usuarios puedan registrarse, iniciar sesión y participar en debates mediante la publicación de mensajes. El frontend está desarrollado con **Angular**, mientras que el backend utiliza **Django** como framework principal.
+Talkhub es una plataforma de foros diseñada para facilitar discusiones entre usuarios en torno a temas diversos. El proyecto busca crear un espacio de conversación estructurado, donde los usuarios puedan registrarse, iniciar sesión y participar en debates mediante la publicación de mensajes. El frontend está desarrollado con **Angular**, mientras que el backend utiliza **NestJS** como framework principal.
 
 ## Estado del Proyecto
 Actualmente, Talkhub está en fase de desarrollo. Se han implementado las funcionalidades básicas del registro y el inicio de sesión de usuarios, incluyendo la validación de formularios y la presentacion de la vista general. Quedan pendientes varias mejoras y funcionalidades adicionales que se planean incorporar en futuras versiones.
@@ -31,12 +31,10 @@ Puedes clonar este repositorio utilizando el siguiente comando:
 
 ### Requisitos para ejecutar el proyecto:
 
-#### Backend (Django):
-- Python 3.x
-- Django
-- Django REST Framework
+#### Backend (NestJS):
+- Python 3.12
+- NestJS
 - SQLite3 
-- Mongodb
 
 #### Frontend (Angular):
 - Angular CLI
