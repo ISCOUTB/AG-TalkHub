@@ -13,11 +13,12 @@ import { AuthGuard } from './auth.guard';
 import { Public } from './public-route.metadata';
 import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { TokenDto } from './dto/token.dto';
 import { ProfileDto } from './dto/profile.dto';
 
+@ApiTags('auth')
 @ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
