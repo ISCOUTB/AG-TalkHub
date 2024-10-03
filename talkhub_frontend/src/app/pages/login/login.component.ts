@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -36,8 +37,8 @@ export class LoginComponent {
     private readonly router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      email: '',
-      password: '',
+      email: ['', Validators.email],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
