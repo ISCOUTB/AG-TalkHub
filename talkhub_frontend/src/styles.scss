@@ -50,11 +50,9 @@ button {
     @apply font-medium py-2 px-4 rounded shadow;
     &:hover {
         background-color: darken($color-primary, 10%);
+        transform: scale(1.05);
     }
     transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-    &:hover {
-      transform: scale(1.05);
-    }
   }
   
 
