@@ -7,7 +7,7 @@ import * as Database from 'better-sqlite3';
 
 @Injectable()
 export class MigrationService implements OnModuleInit {
-  private db: BetterSQLite3Database<typeof schema>;
+  private readonly db: BetterSQLite3Database<typeof schema>;
 
   constructor(private readonly configService: ConfigService) {
     // Initialize better-sqlite3 directly
