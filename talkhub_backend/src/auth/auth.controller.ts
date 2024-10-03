@@ -13,7 +13,10 @@ import { AuthGuard } from './auth.guard';
 import { Public } from './public-route.metadata';
 import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { LoginDto } from './dto/login.dto';
 
+@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -24,7 +27,7 @@ export class AuthController {
   @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() signInDto: Record<string, any>) {
+  signIn(@Body() signInDto: LoginDto) {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
