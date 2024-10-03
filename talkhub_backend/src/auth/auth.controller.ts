@@ -28,7 +28,7 @@ import { ProfileDto } from './dto/profile.dto';
 @Controller('auth')
 export class AuthController {
   constructor(
-    private authService: AuthService,
+    private readonly authService: AuthService,
     private readonly userService: UsersService,
   ) {}
 

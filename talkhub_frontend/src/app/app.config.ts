@@ -21,7 +21,7 @@ function provideApiModuleConfig(
 function apiConfigurationFactory() {
   return new Configuration({
     basePath: 'http://localhost:3000',
-    accessToken: () => localStorage.getItem('access_token') || '', // Use a function to get the token
+    accessToken: () => localStorage.getItem('access_token') ?? '', // Use a function to get the token
   });
 }
 
