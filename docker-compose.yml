@@ -1,27 +1,12 @@
 services:
   app:
     build:
-      context: ./
+      context: ./talkhub_backend
     container_name: talkhub_backend
-    command: python manage.py runserver 0.0.0.0:8004
     ports:
-      - "8004:8004"
+      - "8004:3000"
     volumes:
-      - ./talkhub_backend:/talkhub_backend
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=your_secret_key
-      - ALLOWED_HOSTS=localhost,127.0.0.1
-    depends_on:
-      - mongodb
-
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+      - ./talkhub_backend/db.sqlite3:/usr/src/app/db.sqlite3
 
   frontend:
     build:
@@ -31,6 +16,3 @@ services:
       - "3000:80"
     volumes:
       - ./talkhub_frontend/dist:/talkhub_frontend/dist
-
-volumes:
-  mongo_data:
