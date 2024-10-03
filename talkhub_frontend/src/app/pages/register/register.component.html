@@ -2,28 +2,34 @@
   <div class="left-section">
     <div class="register-form">
       <h1 class="title text-accent">Get Started Now</h1>
-      <form (submit)="onSubmit($event)">
+      <form [formGroup]="registerForm">
         <!-- Name Field -->
         <div class="input-field">
           <input
-            type="text"
-            id="name"
+            type="name"
             placeholder="Name"
             required
-            minlength="6"
+            minlength="4"
             #nameInput
+            formControlName="name"
           />
           <div
-            *ngIf="nameInput.value.length < 6 && nameInput.value !== ''"
+            *ngIf="nameInput.value.length < 4 && nameInput.value !== ''"
             class="error-message"
           >
-            Name must be at least 6 characters long.
+            Name must be at least 4 characters long.
           </div>
         </div>
 
         <!-- Email Field -->
         <div class="input-field">
-          <input type="email" placeholder="Email address" required #emailInput />
+          <input
+            type="email"
+            placeholder="Email address"
+            required
+            #emailInput
+            formControlName="email"
+          />
         </div>
 
         <!-- Password Field -->
@@ -35,6 +41,7 @@
             required
             minlength="6"
             #passwordInput
+            formControlName="password"
           />
           <div
             *ngIf="passwordInput.value.length < 6 && passwordInput.value !== ''"
@@ -76,19 +83,26 @@
 
         <!-- Terms and Conditions -->
         <div class="terms">
-          <input type="checkbox" id="terms" required #termsInput />
+          <input formControlName="terms" type="checkbox" id="terms" required #termsInput />
           <label class="text-primary" for="terms">
-            I agree to the <a href="#">terms &amp; policy</a>
+            I agree to the <a href="/terms">terms &amp; policy</a>
           </label>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="signup-btn text-primary">Sign up</button>
+        <button
+          [class.opacity-50]="registerForm.invalid"
+          [disabled]="registerForm.invalid"
+          (click)="register()"
+          class="signup-btn text-primary"
+        >
+          Sign up
+        </button>
       </form>
 
       <div class="separator">or</div>
       <div class="signin-link">
-        <p class="text-primary" >
+        <p class="text-primary">
           Already have an account?
           <a href="/login">Sign in</a>
         </p>

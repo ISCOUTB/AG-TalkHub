@@ -9,6 +9,7 @@ import { NewdiscussionComponent } from './pages/newdiscussion/newdiscussion.comp
 import { RulesComponent } from './pages/rules/rules.component';
 import { PopularComponent } from './pages/popular/popular.component';
 import { FaqComponent } from './pages/faq/faq.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'terms',
+    component: TermsComponent,
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
