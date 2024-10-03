@@ -2,11 +2,18 @@
   <div class="left-section">
     <div class="login-form">
       <h1 class="title text-accent">Welcome back!</h1>
-      <p class=" text-primary subtitle">Enter your Credentials to access your account</p>
-      <form>
-
+      <p class="text-primary subtitle">
+        Enter your Credentials to access your account
+      </p>
+      <form [formGroup]="loginForm">
         <div class="input-field">
-          <input type="email" placeholder="Email address" required #emailInput />
+          <input
+            type="email"
+            placeholder="Email address"
+            required
+            #emailInput
+            formControlName="email"
+          />
         </div>
 
         <div class="input-field">
@@ -17,6 +24,7 @@
             required
             minlength="6"
             #passwordInput
+            formControlName="password"
           />
           <div
             *ngIf="passwordInput.value.length < 6 && passwordInput.value !== ''"
@@ -26,16 +34,13 @@
           </div>
         </div>
 
-        <div class="remember">
-          <input type="checkbox" id="remember" />
-          <label class="text-primary" for="remember">  Remember for 30 days</label>
-        </div>
-
-        <button type="submit" class="login-btn">Login</button>
+        <button (click)="login()" class="login-btn">Login</button>
       </form>
       <div class="separator">or</div>
       <div class="signup-link">
-        <p class="text-primary" >Don't have an account? <a href="/register">Sign Up</a></p>
+        <p class="text-primary">
+          Don't have an account? <a href="/register">Sign Up</a>
+        </p>
       </div>
     </div>
   </div>
