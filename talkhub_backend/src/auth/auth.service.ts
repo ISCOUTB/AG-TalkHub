@@ -6,8 +6,8 @@ import { HashingService } from 'src/utils/hashing.service';
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
     private readonly hashingService: HashingService,
   ) {}
 
