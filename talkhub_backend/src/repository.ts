@@ -14,8 +14,8 @@ export abstract class Repository<Row, InsertDto = Row, UpdateDto = Row> {
    * @param tableSchema Table name
    */
   constructor(
-    private drizzleProd: BetterSQLite3Database<typeof schema>,
-    private tableSchema: SQLiteTable<TableConfig>,
+    private readonly drizzleProd: BetterSQLite3Database<typeof schema>,
+    private readonly tableSchema: SQLiteTable<TableConfig>,
   ) {}
 
   /**
