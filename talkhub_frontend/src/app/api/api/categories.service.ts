@@ -18,13 +18,13 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { CreateThreadDto } from '../model/createThreadDto';
+import { CategoryCreatedResultDto } from '../model/categoryCreatedResultDto';
 // @ts-ignore
-import { ThreadCreatedResultDto } from '../model/threadCreatedResultDto';
+import { CategoryListItemDto } from '../model/categoryListItemDto';
 // @ts-ignore
-import { ThreadListItemDto } from '../model/threadListItemDto';
+import { CreateCategoryDto } from '../model/createCategoryDto';
 // @ts-ignore
-import { UpdateThreadDto } from '../model/updateThreadDto';
+import { UpdateCategoryDto } from '../model/updateCategoryDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -35,7 +35,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class ThreadsService {
+export class CategoriesService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -99,17 +99,17 @@ export class ThreadsService {
 
     /**
      * 
-     * Create a new thread
-     * @param createThreadDto 
+     * Create a new category
+     * @param createCategoryDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createThread(createThreadDto: CreateThreadDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ThreadCreatedResultDto>;
-    public createThread(createThreadDto: CreateThreadDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ThreadCreatedResultDto>>;
-    public createThread(createThreadDto: CreateThreadDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ThreadCreatedResultDto>>;
-    public createThread(createThreadDto: CreateThreadDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (createThreadDto === null || createThreadDto === undefined) {
-            throw new Error('Required parameter createThreadDto was null or undefined when calling createThread.');
+    public createCategory(createCategoryDto: CreateCategoryDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CategoryCreatedResultDto>;
+    public createCategory(createCategoryDto: CreateCategoryDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CategoryCreatedResultDto>>;
+    public createCategory(createCategoryDto: CreateCategoryDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CategoryCreatedResultDto>>;
+    public createCategory(createCategoryDto: CreateCategoryDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (createCategoryDto === null || createCategoryDto === undefined) {
+            throw new Error('Required parameter createCategoryDto was null or undefined when calling createCategory.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -164,11 +164,11 @@ export class ThreadsService {
             }
         }
 
-        let localVarPath = `/threads`;
-        return this.httpClient.request<ThreadCreatedResultDto>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/categories`;
+        return this.httpClient.request<CategoryCreatedResultDto>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: createThreadDto,
+                body: createCategoryDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -181,17 +181,17 @@ export class ThreadsService {
 
     /**
      * 
-     * Delete a thread
+     * Delete a category
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteThread(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public deleteThread(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public deleteThread(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public deleteThread(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public deleteCategory(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public deleteCategory(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public deleteCategory(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public deleteCategory(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteThread.');
+            throw new Error('Required parameter id was null or undefined when calling deleteCategory.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -236,7 +236,7 @@ export class ThreadsService {
             }
         }
 
-        let localVarPath = `/threads/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
+        let localVarPath = `/categories/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -252,14 +252,14 @@ export class ThreadsService {
 
     /**
      * 
-     * Get all threads
+     * Get all categories
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllThreads(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<ThreadListItemDto>>;
-    public getAllThreads(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<ThreadListItemDto>>>;
-    public getAllThreads(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<ThreadListItemDto>>>;
-    public getAllThreads(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public getAllCategories(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<CategoryListItemDto>>;
+    public getAllCategories(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<CategoryListItemDto>>>;
+    public getAllCategories(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<CategoryListItemDto>>>;
+    public getAllCategories(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -304,8 +304,8 @@ export class ThreadsService {
             }
         }
 
-        let localVarPath = `/threads`;
-        return this.httpClient.request<Array<ThreadListItemDto>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/categories`;
+        return this.httpClient.request<Array<CategoryListItemDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -320,21 +320,21 @@ export class ThreadsService {
 
     /**
      * 
-     * Update a thread
+     * Update a category
      * @param id 
-     * @param updateThreadDto 
+     * @param updateCategoryDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateThread(id: number, updateThreadDto: UpdateThreadDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public updateThread(id: number, updateThreadDto: UpdateThreadDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public updateThread(id: number, updateThreadDto: UpdateThreadDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public updateThread(id: number, updateThreadDto: UpdateThreadDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public updateCategory(id: number, updateCategoryDto: UpdateCategoryDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public updateCategory(id: number, updateCategoryDto: UpdateCategoryDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public updateCategory(id: number, updateCategoryDto: UpdateCategoryDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public updateCategory(id: number, updateCategoryDto: UpdateCategoryDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateThread.');
+            throw new Error('Required parameter id was null or undefined when calling updateCategory.');
         }
-        if (updateThreadDto === null || updateThreadDto === undefined) {
-            throw new Error('Required parameter updateThreadDto was null or undefined when calling updateThread.');
+        if (updateCategoryDto === null || updateCategoryDto === undefined) {
+            throw new Error('Required parameter updateCategoryDto was null or undefined when calling updateCategory.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -388,11 +388,11 @@ export class ThreadsService {
             }
         }
 
-        let localVarPath = `/threads/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
+        let localVarPath = `/categories/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: updateThreadDto,
+                body: updateCategoryDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

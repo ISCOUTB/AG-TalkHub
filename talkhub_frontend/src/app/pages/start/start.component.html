@@ -70,19 +70,15 @@
         </svg>
       </button>
     </h2>
-    <ul>
-      <li class="border-b border-secondary py-2">
-        <a href="#" class="text-accent hover:underline">Movies</a>
-        <p class="text-sm text-primary">Last updated on Mar 1, 2024</p>
-      </li>
-      <li class="border-b border-secondary py-2">
-        <a href="#" class="text-accent hover:underline">Tv Shows</a>
-        <p class="text-sm text-primary">Last updated on Mar 1, 2024</p>
-      </li>
-      <li class="border-b border-secondary py-2">
-        <a href="#" class="text-accent hover:underline">Media</a>
-        <p class="text-sm text-primary">Last updated on Mar 1, 2024</p>
-      </li>
-    </ul>
+    <div *ngFor="let categories of categories">
+      <ul>
+        <li class="border-b border-secondary py-2">
+          <a href="#" class="text-accent hover:underline">{{ categories.name }}</a>
+          <p class="text-sm text-primary">
+           {{ categories.description }}
+          </p>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

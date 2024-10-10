@@ -1,3 +1,6 @@
+export * from './categoryCreatedResultDto';
+export * from './categoryListItemDto';
+export * from './createCategoryDto';
 export * from './createThreadDto';
 export * from './createUserDto';
 export * from './loginDto';
@@ -7,4 +10,5 @@ export * from './threadListItemCategoryDto';
 export * from './threadListItemDto';
 export * from './threadListItemUserDto';
 export * from './tokenDto';
+export * from './updateCategoryDto';
 export * from './updateThreadDto';

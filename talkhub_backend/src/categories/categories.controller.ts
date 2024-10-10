@@ -28,7 +28,7 @@ export class CategoriesController {
 
   @ApiOperation({
     description: 'Get all categories',
-    operationId: 'getAll',
+    operationId: 'getAllCategories',
   })
   @ApiResponse({
     status: 200,
