@@ -11,15 +11,15 @@
           <div class="card-header">
             <h2 class="text-2xl font-semibold mb-2">{{ thread.title }}</h2>
             <p class="text-sm text-primary mb-4">
-              Posted by {{ thread.author }} in {{ thread.category }} •
-              {{ thread.date }}
+              Posted by {{ thread.user.name }} in {{ thread.category.name }} •
+              {{ thread.publication_date }}
             </p>
           </div>
           <div class="card-content flex-1">
             <p class="text-neutral">{{ thread.content }}</p>
           </div>
           <div class="card-footer mt-4">
-            <button class="btn-primary" [routerLink]="['/threads', thread.id]">
+            <button class="btn-primary" [routerLink]="['/threads', thread.id_thread]">
               View Discussion
             </button>
           </div>
