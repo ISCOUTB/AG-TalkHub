@@ -9,6 +9,7 @@ import { UtilsModule } from './utils/utils.module';
 import * as schema from './db/schema';
 import { MigrationService } from './migration.service';
 import { config } from 'dotenv';
+import { ThreadsModule } from './threads/threads.module';
 config();
 
 @Module({
@@ -24,6 +25,7 @@ config();
       config: { schema: { ...schema } },
     }),
     UtilsModule,
+    ThreadsModule,
   ],
   controllers: [AppController],
   providers: [AppService, MigrationService],
