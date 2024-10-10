@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ThreadListItemDto, ThreadsService } from '../../api';
+import { CategoryListItemDto, CategoriesService } from '../../api';
 
 @Component({
   selector: 'app-start',
@@ -12,11 +13,12 @@ import { ThreadListItemDto, ThreadsService } from '../../api';
 })
 export class StartComponent implements OnInit {
   threads: ThreadListItemDto[] = [];
-
-  constructor(private readonly threadsService: ThreadsService) {}
+  categories: CategoryListItemDto[] = [];
+  constructor(private readonly threadsService: ThreadsService, private readonly categoriesService: CategoriesService) {}
+  
 
   ngOnInit(): void {
-    this.threadsService.getAll().subscribe({
+    this.threadsService.getAllThreads().subscribe({
       next: (threads) => {
         this.threads = threads;
       },
@@ -24,6 +26,13 @@ export class StartComponent implements OnInit {
         console.error('Error fetching threads', error);
       },
     });
-  }
-
+    this.categoriesService.getAllCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+  });
+}
 }

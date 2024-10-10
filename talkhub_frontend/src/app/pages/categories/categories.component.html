@@ -10,9 +10,6 @@
         <div class="card h-full flex flex-col">
           <div class="card-header">
             <h2 class="text-2xl text-accent font-semibold mb-2">{{ category.name }}</h2>
-            <p class="text-sm text-primary mb-4">
-              Last updated on {{ category.lastUpdated }}
-            </p>
           </div>
           <div class="card-content flex-1">
             <p class="text-primary">{{ category.description }}</p>
@@ -20,7 +17,7 @@
           <div class="card-footer mt-4">
             <button
               class="btn-primary"
-              [routerLink]="['/categories', category.id]"
+              [routerLink]="['/categories', category.id_category]"
             >
               View Discussions
             </button>

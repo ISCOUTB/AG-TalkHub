@@ -16,7 +16,7 @@ export class ThreadsComponent implements OnInit {
   constructor(private readonly threadsService: ThreadsService) {}
 
   ngOnInit(): void {
-    this.threadsService.getAll().subscribe({
+    this.threadsService.getAllThreads().subscribe({
       next: (threads) => {
         this.threads = threads;
       },

@@ -22,7 +22,35 @@ export class ThreadListItemUserDto {
   })
   name: string;
 }
+export class ThreadListItemCategoryDto {
+  /**
+   * The category's id
+   */
+  @ApiProperty({
+    description: "The category's id",
+    example: 1,
+  })
+  id_category: number;
 
+  /**
+   * The category's name
+   */
+
+  @ApiProperty({
+    description: "The category's name",
+    example: 'Category Name',
+  })
+  name: string;
+
+  /**
+   * The category's description
+   */
+  @ApiProperty({
+    description: "The category's description",
+    example: 'Category Description',
+  })
+  description: string;
+}
 /**
  * This class is a data transfer object for a thread
  */
@@ -78,7 +106,12 @@ export class ThreadListItemDto {
    */
   @ApiProperty({
     description: "The thread's category",
-    example: 1,
+    example: {
+      id_category: 1,
+      name: 'Category Name',
+      description: 'Category Description',
+    },
+    type: ThreadListItemCategoryDto,
   })
-  id_category: number;
+  category: ThreadListItemCategoryDto;
 }

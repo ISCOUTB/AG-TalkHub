@@ -28,7 +28,7 @@ export class ThreadsController {
 
   @ApiOperation({
     description: 'Get all threads',
-    operationId: 'getAll',
+    operationId: 'getAllThreads',
   })
   @ApiResponse({
     status: 200,
@@ -74,7 +74,7 @@ export class ThreadsController {
 
   @ApiOperation({
     description: 'Delete a thread',
-    operationId: 'delete thread',
+    operationId: 'deleteThread',
   })
   @ApiResponse({ status: 200, description: 'Thread deleted' })
   @ApiResponse({ status: 400, description: 'Bad request' })
