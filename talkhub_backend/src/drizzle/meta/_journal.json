@@ -15,6 +15,13 @@
       "when": 1727912795570,
       "tag": "0001_lethal_enchantress",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1728516361207,
+      "tag": "0002_abnormal_havok",
+      "breakpoints": true
     }
   ]
 }
