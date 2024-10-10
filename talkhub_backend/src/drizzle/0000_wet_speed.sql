@@ -25,6 +25,14 @@ CREATE TABLE `threads` (
 	FOREIGN KEY (`id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `users` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`name` text,
+	`email` text,
+	`password` text,
+	`role` text
+);
+--> statement-breakpoint
 CREATE TABLE `votes` (
 	`id_vote` integer PRIMARY KEY NOT NULL,
 	`id_thread` integer,
