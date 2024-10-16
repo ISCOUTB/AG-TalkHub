@@ -20,7 +20,7 @@ function provideApiModuleConfig(
 
 function apiConfigurationFactory() {
   return new Configuration({
-    basePath: 'http://localhost:3000',
+    basePath: 'http://localhost:8004',
     accessToken: () => localStorage.getItem('access_token') ?? '', // Use a function to get the token
   });
 }
