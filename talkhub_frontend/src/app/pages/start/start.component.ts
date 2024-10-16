@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ThreadListItemDto, ThreadsService } from '../../api';
-import { CategoryListItemDto, CategoriesService } from '../../api';
+import { ThreadListItemDto, ThreadsService, CategoryListItemDto, CategoriesService } from '../../api';
 
 @Component({
   selector: 'app-start',
