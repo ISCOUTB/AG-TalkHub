@@ -7,6 +7,8 @@ services:
       - "8005:8005"
     volumes:
       - ./talkhub_backend/db.sqlite3:/usr/src/app/db.sqlite3
+    networks:
+      - ag
 
   frontend:
     build:
@@ -16,3 +18,12 @@ services:
       - "3000:3000"
     volumes:
       - ./talkhub_frontend/dist:/talkhub_frontend/dist
+    networks:
+      - ag
+
+networks:
+  ag:
+    external: true
+
+    
+
