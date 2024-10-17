@@ -4,7 +4,7 @@ services:
       context: ./talkhub_backend
     container_name: talkhub_backend
     ports:
-      - "8004:8004"
+      - "8005:8005"
     volumes:
       - ./talkhub_backend/db.sqlite3:/usr/src/app/db.sqlite3
 
