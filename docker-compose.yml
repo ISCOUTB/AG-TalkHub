@@ -13,6 +13,6 @@ services:
       context: ./talkhub_frontend
     container_name: frontend
     ports:
-      - "3000:80"
+      - "3000:3000"
     volumes:
       - ./talkhub_frontend/dist:/talkhub_frontend/dist
