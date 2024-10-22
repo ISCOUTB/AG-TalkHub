@@ -10,26 +10,22 @@
  */
 
 
-export interface CreateThreadDto { 
+export interface UpdateCommentDto { 
     /**
-     * The thread\'s title
-     */
-    title: string;
-    /**
-     * The thread\'s content
+     * The comment\'s content
      */
     content: string;
     /**
-     * The thread\'s publication date
+     * The comment\'s publication date
      */
     publication_date: string;
     /**
-     * The thread\'s category
+     * The comment\'s thread
      */
-    id_category: number;
+    id_thread: number;
     /**
-     * The thread\'s user
+     * The comment\'s user
      */
-    id_user?: number;
+    id_user: number;
 }
 

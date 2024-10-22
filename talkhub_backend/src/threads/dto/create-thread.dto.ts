@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 /**
  * This class is a data transfer object for creating a thread
@@ -52,9 +52,11 @@ export class CreateThreadDto {
    * The thread's user
    */
   @IsNumber()
+  @IsOptional()
   @ApiProperty({
     description: "The thread's user",
     example: 1,
+    required: false,
   })
   id_user: number;
 }

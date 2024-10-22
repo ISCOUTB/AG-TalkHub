@@ -8,28 +8,29 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { CommentListItemUserDto } from './commentListItemUserDto';
 
 
-export interface CreateThreadDto { 
+export interface CommentListItemDto { 
     /**
-     * The thread\'s title
+     * The comment\'s id
      */
-    title: string;
+    id_comment: number;
     /**
-     * The thread\'s content
+     * The comment\'s content
      */
     content: string;
     /**
-     * The thread\'s publication date
+     * The comment\'s publication date
      */
     publication_date: string;
     /**
-     * The thread\'s category
+     * The comment\'s user
      */
-    id_category: number;
+    user: CommentListItemUserDto;
     /**
-     * The thread\'s user
+     * The comment\'s thread
      */
-    id_user?: number;
+    thread: object;
 }
 

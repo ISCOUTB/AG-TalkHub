@@ -5,32 +5,70 @@
       <label for="title" class="block text-primary">Title</label>
       <input
         type="title"
+        formControlName="title"
+        minlength="4"
+        maxlength="50"
         class="w-full px-3 py-2 border border-primary rounded-md"
         required
         #titleInput
         placeholder="Enter discussion title"
       />
+      <div
+        *ngIf="titleInput.value.length < 4 && titleInput.value !== ''"
+        class="error-message"
+      >
+        Title must be at least 4 characters long.
+      </div>
+      <div
+        *ngIf="titleInput.value.length > 50 && titleInput.value !== ''"
+        class="error-message"
+      >
+        Title must be at most 50 characters long.
+      </div>
     </div>
     <div class="mb-4 input-field">
-      <label for="title" class="block text-primary">Categories</label>
-      <input
+      <label for="categories" class="block text-primary">Categories</label>
+      <select
         type="categories"
+        formControlName="categories"
         class="w-full px-3 py-2 border border-primary rounded-md"
         required
         #categoriesInput
-        placeholder="Enter discussion title"
-      />
+      >
+        <option value="" disabled selected>Select a category</option>
+        <option
+          *ngFor="let category of categories"
+          [value]="category.id_category"
+        >
+          {{ category.name }}
+        </option>
+      </select>
     </div>
     <div class="mb-4 input-field">
       <label for="content" class="block text-primary">Content</label>
       <textarea
         type="content"
+        minlength="10"
+        maxlength="1250"
+        formControlName="content"
         class="w-full px-3 py-2 border border-primary rounded-md"
         rows="4"
         placeholder="Enter discussion content"
         required
         #contentInput
       ></textarea>
+      <div
+        *ngIf="contentInput.value.length < 10 && contentInput.value !== ''"
+        class="error-message"
+      >
+        Content must be at least 10 characters long.
+      </div>
+      <div
+        *ngIf="contentInput.value.length > 1250 && contentInput.value !== ''"
+        class="error-message"
+      >
+        Content must be at most 1250 characters long.
+      </div>
     </div>
     <button
       [class.opacity-50]="newdiscussionForm.invalid"

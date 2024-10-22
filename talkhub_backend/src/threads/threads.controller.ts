@@ -7,6 +7,7 @@ import {
   Post,
   Delete,
   Get,
+  Req,
 } from '@nestjs/common';
 import { ThreadsService } from './threads.service';
 import { CreateThreadDto } from './dto/create-thread.dto';
@@ -19,12 +20,17 @@ import {
 } from '@nestjs/swagger';
 import { ThreadCreatedResultDto } from './dto/ThreadCreatedResultDto';
 import { ThreadListItemDto } from './dto/thread-list-item.dto';
+import { CommentsService } from 'src/comments/comments.service';
+import { CommentListItemDto } from 'src/comments/dto/comment-list-item.dto';
 
 @ApiBearerAuth()
 @ApiTags('threads')
 @Controller('threads')
 export class ThreadsController {
-  constructor(private readonly threadsService: ThreadsService) {}
+  constructor(
+    private readonly threadsService: ThreadsService,
+    private readonly commentsService: CommentsService,
+  ) {}
 
   @ApiOperation({
     description: 'Get all threads',
@@ -41,6 +47,31 @@ export class ThreadsController {
   }
 
   @ApiOperation({
+    description: 'Get all comments of a thread',
+    operationId: 'getThreadComments',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'All comments of a thread',
+    type: [CommentListItemDto],
+  })
+  @Get(':id/comments')
+  getThreadComments(@Param('id', ParseIntPipe) id: number) {
+    return this.commentsService.getThreadComments(id);
+  }
+
+  @ApiOperation({
+    description: 'Get a thread by id',
+    operationId: 'getThreadById',
+  })
+  @ApiResponse({ status: 200, description: 'Thread found' })
+  @ApiResponse({ status: 404, description: 'Thread not found' })
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.threadsService.getThreadById(id);
+  }
+
+  @ApiOperation({
     description: 'Create a new thread',
     operationId: 'createThread',
   })
@@ -51,7 +82,8 @@ export class ThreadsController {
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @Post()
-  async createThread(@Body() createThreadDto: CreateThreadDto) {
+  async createThread(@Body() createThreadDto: CreateThreadDto, @Req() req) {
+    createThreadDto.id_user = req.user.sub;
     const result = await this.threadsService.insert(createThreadDto);
     const dto = new ThreadCreatedResultDto();
     dto.id_thread = Number(result.lastInsertRowid);
