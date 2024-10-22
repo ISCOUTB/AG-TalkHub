@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule
-import { ThreadsService } from '../../api'; // Import Configuration
+import { ThreadsService, CategoriesService, CategoryListItemDto } from '../../api'; // Import Configuration
 import {
   FormBuilder,
   FormGroup,
@@ -19,27 +19,38 @@ import { Router } from '@angular/router';
 })
 export class NewdiscussionComponent {
   newdiscussionForm: FormGroup;
+  categories: CategoryListItemDto[] = [];
+  user = JSON.parse(localStorage.getItem('user') || '{}');
 
   constructor(
+    private readonly categoriesService: CategoriesService,
     private readonly threadService: ThreadsService,
     private readonly formBuilder: FormBuilder,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this.newdiscussionForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      content: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(4)]],
+      content: ['', [Validators.required, Validators.maxLength(1250), Validators.minLength(10)]],
       categories: ['', Validators.required],
     });
   }
-
+  ngOnInit(): void {
+    this.categoriesService.getAllCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      }
+    });
+  }
   createThread() {
     this.threadService
       .createThread({
         title: this.newdiscussionForm.value.title || '',
         content: this.newdiscussionForm.value.content || '',
-        id_category: this.newdiscussionForm.value.categories || '',
-        publication_date: new Date().toISOString(),
-        id_user: 1,
+        id_category: parseInt(this.newdiscussionForm.value.categories, 10) || 0,
+        publication_date: new Date().toISOString().split('T')[0]
       })
       .subscribe({
         next: (response) => {

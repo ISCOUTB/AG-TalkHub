@@ -10,6 +10,8 @@ import { RulesComponent } from './pages/rules/rules.component';
 import { PopularComponent } from './pages/popular/popular.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { ThreadDetailComponent } from './pages/thread-detail/thread-detail.component';
+//import { CategoryDetailComponent } from './pages/category-detail/category-detail.component';
 
 export const routes: Routes = [
   {
@@ -37,9 +39,19 @@ export const routes: Routes = [
     path: 'categories',
     component: CategoriesComponent,
   },
+  /*
+  {
+    path: 'categories/:id',
+    component: CategoryDetailComponent,
+  },
+  */
   {
     path: 'threads',
     component: ThreadsComponent,
+  },
+  {
+    path: 'threads/:id',
+    component: ThreadDetailComponent,
   },
   {
     path: 'newdiscussion',
@@ -56,7 +68,5 @@ export const routes: Routes = [
   {
     path: 'faq',
     component: FaqComponent,
-  }
+  },
 ];
-      
-

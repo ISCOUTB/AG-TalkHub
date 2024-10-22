@@ -92,11 +92,14 @@ export class ThreadListItemDto {
   content: string;
 
   /**
-   * The thread's publication date
+   * The thread's user
    */
   @ApiProperty({
-    description: "The thread's publication date",
-    example: '2024-01-01',
+    description: "The thread's user",
+    example: {
+      id_user: 1,
+      name: 'name',
+    },
     type: ThreadListItemUserDto,
   })
   user: ThreadListItemUserDto;

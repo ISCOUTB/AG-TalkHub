@@ -1,6 +1,10 @@
 export * from './categoryCreatedResultDto';
 export * from './categoryListItemDto';
+export * from './commentCreatedResultDto';
+export * from './commentListItemDto';
+export * from './commentListItemUserDto';
 export * from './createCategoryDto';
+export * from './createCommentDto';
 export * from './createThreadDto';
 export * from './createUserDto';
 export * from './loginDto';
@@ -11,4 +15,5 @@ export * from './threadListItemDto';
 export * from './threadListItemUserDto';
 export * from './tokenDto';
 export * from './updateCategoryDto';
+export * from './updateCommentDto';
 export * from './updateThreadDto';

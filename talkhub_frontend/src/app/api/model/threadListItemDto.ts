@@ -30,7 +30,7 @@ export interface ThreadListItemDto {
      */
     content: string;
     /**
-     * The thread\'s publication date
+     * The thread\'s user
      */
     user: ThreadListItemUserDto;
     /**

@@ -4,6 +4,7 @@ api.module.ts
 api/api.ts
 api/auth.service.ts
 api/categories.service.ts
+api/comments.service.ts
 api/default.service.ts
 api/threads.service.ts
 configuration.ts
@@ -12,7 +13,11 @@ git_push.sh
 index.ts
 model/categoryCreatedResultDto.ts
 model/categoryListItemDto.ts
+model/commentCreatedResultDto.ts
+model/commentListItemDto.ts
+model/commentListItemUserDto.ts
 model/createCategoryDto.ts
+model/createCommentDto.ts
 model/createThreadDto.ts
 model/createUserDto.ts
 model/loginDto.ts
@@ -24,6 +29,7 @@ model/threadListItemDto.ts
 model/threadListItemUserDto.ts
 model/tokenDto.ts
 model/updateCategoryDto.ts
+model/updateCommentDto.ts
 model/updateThreadDto.ts
 param.ts
 variables.ts

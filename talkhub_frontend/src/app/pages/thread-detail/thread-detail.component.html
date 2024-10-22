@@ -1,0 +1,91 @@
+<div class="container mx-auto p-6">
+  <div *ngIf="thread" class="thread-card bg-white shadow-lg rounded-lg p-6">
+    <!-- Thread Title -->
+    <h1 class="thread-title text-4xl font-extrabold mb-6">
+      {{ thread.title }}
+    </h1>
+
+    <!-- Thread Content -->
+    <p class="thread-body text-lg leading-relaxed mb-10">
+      {{ thread.content }}
+    </p>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+      <h2 class="comments-title text-2xl font-bold text-accent mb-4">
+        Comments
+      </h2>
+
+      <!-- List of Comments -->
+      <ul
+        *ngIf="comments.length > 0; else noComments"
+        class="comments-list space-y-6"
+      >
+        <li *ngFor="let comment of comments" class="comment-item border-b py-4">
+          <p class="comment-content text-base mb-2">{{ comment.content }}</p>
+          <p class="comment-meta text-sm text-gray-500">
+            Posted by
+            <span class="comment-user text-primary font-medium">{{
+              comment.user.name
+            }}</span>
+            on {{ comment.publication_date }}
+          </p>
+        </li>
+      </ul>
+
+      <!-- No Comments Template -->
+      <ng-template #noComments>
+        <p class="text-center text-gray-500">
+          No comments yet. Be the first to comment!
+        </p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Post a Comment Section -->
+  <div class="post-comment-section bg-white shadow-lg rounded-lg p-6 mt-8">
+    <h2 class="text-2xl font-bold text-primary mb-4">Post a Comment</h2>
+
+    <form [formGroup]="commentForm">
+      <div class="mb-4">
+        <textarea
+          type="content"
+          minlength="10"
+          maxlength="5000"
+          formControlName="content"
+          class="w-full px-3 py-2 border border-primary rounded-md"
+          rows="4"
+          placeholder="Type your comment"
+          required
+          #contentInput
+        ></textarea>
+        <div
+          *ngIf="contentInput.value.length < 10 && contentInput.value !== ''"
+          class="error-message"
+        >
+          Content must be at least 10 characters long.
+        </div>
+        <div
+          *ngIf="contentInput.value.length > 1250 && contentInput.value !== ''"
+          class="error-message"
+        >
+          Content must be at most 1250 characters long.
+        </div>
+      </div>
+
+      <button
+        [class.opacity-50]="commentForm.invalid"
+        (click)="createComment()"
+        class="btn-primary"
+        [disabled]="commentForm.invalid"
+      >
+        Post Comment
+      </button>
+    </form>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="!thread" class="loading-message text-center">
+    <p>Loading thread...</p>
+  </div>
+</div>

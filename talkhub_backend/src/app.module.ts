@@ -11,6 +11,7 @@ import { MigrationService } from './migration.service';
 import { config } from 'dotenv';
 import { ThreadsModule } from './threads/threads.module';
 import { CategoriesModule } from './categories/categories.module';
+import { CommentsModule } from './comments/comments.module';
 config();
 
 @Module({
@@ -28,6 +29,7 @@ config();
     UtilsModule,
     ThreadsModule,
     CategoriesModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService, MigrationService],
