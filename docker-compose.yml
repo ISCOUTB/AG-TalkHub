@@ -6,9 +6,9 @@ services:
     ports:
       - "8005:8005"
     volumes:
-      - ./talkhub_backend/db.sqlite3:/usr/src/app/db.sqlite3
-    networks:
-      - ag
+      - ./talkhub_backend/db:/usr/src/app/db
+    # networks:
+    #   - ag
 
   frontend:
     build:
@@ -16,10 +16,8 @@ services:
     container_name: frontend
     ports:
       - "3000:3000"
-    volumes:
-      - ./talkhub_frontend/dist:/talkhub_frontend/dist
-    networks:
-      - ag
+    # networks:
+    #   - ag
 
 networks:
   ag:
