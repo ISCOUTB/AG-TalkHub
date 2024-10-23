@@ -1,8 +1,8 @@
 services:
-  app:
+  ag-talkhub_backend:
     build:
       context: ./talkhub_backend
-    container_name: talkhub_backend
+    container_name: ag-talkhub_backend
     ports:
       - "8005:8005"
     volumes:
@@ -10,10 +10,10 @@ services:
     networks:
       - ag
 
-  frontend:
+  ag-talkhub_frontend:
     build:
       context: ./talkhub_frontend
-    container_name: frontend
+    container_name: ag-talkhub_frontend
     ports:
       - "3000:3000"
     networks:
