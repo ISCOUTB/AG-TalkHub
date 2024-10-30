@@ -16,7 +16,7 @@ export class ThreadDetailComponent implements OnInit {
   thread: ThreadDto | null = null;
   comments: CommentListItemDto[] = [];
   commentForm: FormGroup;
-  user = JSON.parse(localStorage.getItem('user') || '{}');
+  user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
   constructor(
     private readonly route: ActivatedRoute,

@@ -8,21 +8,20 @@ COPY ./config/talkhub_frontend.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /talkhub_frontend
 
-RUN apt update
-
-RUN apt install -y curl
-
-RUN curl https://get.volta.sh | bash
 ENV VOLTA_HOME "/root/.volta"
 ENV PATH "$VOLTA_HOME/bin:$PATH"
 
-RUN volta install node@20.17.0
+RUN apt update && \
+    apt --no-install-recommends install -y curl ca-certificates && \
+    apt clean && \
+    curl https://get.volta.sh | bash && \
+    volta install node@20.17.0
 
 COPY package.json .
 
-RUN npm install
+RUN npm install --ignore-scripts
 
-ADD src src
+COPY src src
 COPY angular.json .
 COPY tsconfig.json .
 COPY tsconfig.app.json .
@@ -31,4 +30,4 @@ COPY tailwind.config.js .
 
 RUN npx ng build --configuration=production
 
-CMD nginx -g 'daemon off;'
+CMD [nginx -g 'daemon off;']

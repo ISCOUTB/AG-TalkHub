@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class NewdiscussionComponent {
   newdiscussionForm: FormGroup;
   categories: CategoryListItemDto[] = [];
-  user = JSON.parse(localStorage.getItem('user') || '{}');
+  user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
   constructor(
     private readonly categoriesService: CategoriesService,
