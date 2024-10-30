@@ -30,4 +30,4 @@ COPY tailwind.config.js .
 
 RUN npx ng build --configuration=production
 
-CMD [nginx -g 'daemon off;']
+CMD ["nginx", "-g", "daemon off;"]
