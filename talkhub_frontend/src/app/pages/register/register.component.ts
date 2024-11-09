@@ -56,6 +56,8 @@ export class RegisterComponent {
         password: this.registerForm.value.password || '',
         name: this.registerForm.value.name || '',
         role: 'regular',
+        bio: '',
+        creation_date: new Date().toISOString().split('T')[0],
       })
       .subscribe({
         next: (response) => {

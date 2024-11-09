@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `creation_date` text;

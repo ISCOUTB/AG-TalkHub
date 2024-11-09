@@ -27,6 +27,14 @@ export interface CreateUserDto {
      * The user\'s role
      */
     role: CreateUserDto.RoleEnum;
+    /**
+     * The user\'s bio
+     */
+    bio: string;
+    /**
+     * The user\'s creation date
+     */
+    creation_date: string;
 }
 export namespace CreateUserDto {
     export type RoleEnum = 'admin' | 'regular' | 'moderator';

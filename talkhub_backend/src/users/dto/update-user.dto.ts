@@ -41,4 +41,11 @@ export class UpdateUserDto {
   @IsIn(['admin', 'regular', 'moderator'])
   @IsOptional()
   role: string;
+
+  /**
+   * The user's bio
+   */
+  @IsString()
+  @IsOptional()
+  bio: string;
 }

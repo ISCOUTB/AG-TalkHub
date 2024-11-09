@@ -12,6 +12,7 @@ import { config } from 'dotenv';
 import { ThreadsModule } from './threads/threads.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CommentsModule } from './comments/comments.module';
+import { VotesModule } from './votes/votes.module';
 config();
 
 @Module({
@@ -30,6 +31,7 @@ config();
     ThreadsModule,
     CategoriesModule,
     CommentsModule,
+    VotesModule,
   ],
   controllers: [AppController],
   providers: [AppService, MigrationService],

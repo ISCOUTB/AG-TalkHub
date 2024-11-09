@@ -1,0 +1,311 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "38e2ae72-de96-4880-88b4-e4793d93c958",
+  "prevId": "5f066351-a2dc-4266-8b23-1d4b780c656e",
+  "tables": {
+    "categories": {
+      "name": "categories",
+      "columns": {
+        "id_category": {
+          "name": "id_category",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "comments": {
+      "name": "comments",
+      "columns": {
+        "id_comment": {
+          "name": "id_comment",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id_thread": {
+          "name": "id_thread",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "publication_date": {
+          "name": "publication_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "comments_id_thread_threads_id_thread_fk": {
+          "name": "comments_id_thread_threads_id_thread_fk",
+          "tableFrom": "comments",
+          "tableTo": "threads",
+          "columnsFrom": [
+            "id_thread"
+          ],
+          "columnsTo": [
+            "id_thread"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "comments_id_users_id_fk": {
+          "name": "comments_id_users_id_fk",
+          "tableFrom": "comments",
+          "tableTo": "users",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "threads": {
+      "name": "threads",
+      "columns": {
+        "id_thread": {
+          "name": "id_thread",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id_category": {
+          "name": "id_category",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "publication_date": {
+          "name": "publication_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "threads_id_category_categories_id_category_fk": {
+          "name": "threads_id_category_categories_id_category_fk",
+          "tableFrom": "threads",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "id_category"
+          ],
+          "columnsTo": [
+            "id_category"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "threads_id_users_id_fk": {
+          "name": "threads_id_users_id_fk",
+          "tableFrom": "threads",
+          "tableTo": "users",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "votes": {
+      "name": "votes",
+      "columns": {
+        "id_vote": {
+          "name": "id_vote",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id_thread": {
+          "name": "id_thread",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "type": {
+          "name": "type",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "votes_id_thread_threads_id_thread_fk": {
+          "name": "votes_id_thread_threads_id_thread_fk",
+          "tableFrom": "votes",
+          "tableTo": "threads",
+          "columnsFrom": [
+            "id_thread"
+          ],
+          "columnsTo": [
+            "id_thread"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "votes_id_users_id_fk": {
+          "name": "votes_id_users_id_fk",
+          "tableFrom": "votes",
+          "tableTo": "users",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

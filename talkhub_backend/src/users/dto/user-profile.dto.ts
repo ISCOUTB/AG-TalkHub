@@ -1,22 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEmail,
-  IsIn,
-  IsOptional,
-  IsString,
-  MinLength,
-} from 'class-validator';
 
-/**
- * This class is a data transfer object for creating a user
- * using class-validator
- */
-export class CreateUserDto {
+export class ProfileUserDto {
   /**
    * The user's email
    */
-  @IsString()
-  @IsEmail()
   @ApiProperty({
     description: "The user's email",
     example: 'example@talkhub.com',
@@ -24,20 +11,8 @@ export class CreateUserDto {
   email: string;
 
   /**
-   * The user's password
-   */
-  @IsString()
-  @MinLength(6)
-  @ApiProperty({
-    description: "The user's password",
-    example: 'password',
-  })
-  password: string;
-
-  /**
    * The user's name
    */
-  @IsString()
   @ApiProperty({
     description: "The user's name",
     example: 'John Doe',
@@ -47,8 +22,6 @@ export class CreateUserDto {
   /**
    * The user's role
    */
-  @IsString()
-  @IsIn(['admin', 'regular', 'moderator'])
   @ApiProperty({
     description: "The user's role",
     example: 'regular',
@@ -56,18 +29,30 @@ export class CreateUserDto {
   })
   role: string;
 
-  @IsString()
-  @IsOptional()
+  /**
+   * The user's id
+   */
+  @ApiProperty({
+    description: "The user's id",
+    example: 1,
+  })
+  id_user: number;
+
+  /**
+   * The user's bio
+   */
   @ApiProperty({
     description: "The user's bio",
-    example: 'I am a software engineer',
+    example: 'This is my bio',
   })
   bio: string;
 
-  @IsString()
+  /**
+   * The user's creation date
+   */
   @ApiProperty({
     description: "The user's creation date",
-    example: '2024-01-01',
+    example: '2021-01-01',
   })
   creation_date: string;
 }
