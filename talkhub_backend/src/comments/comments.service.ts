@@ -36,7 +36,22 @@ export class CommentsService extends Repository<
       },
     });
   }
-
+  async getAllUserComments(id: number) {
+    return this.drizzle.query.comments.findMany({
+      where: (comments, { eq }) => eq(comments.id_user, id),
+      with: {
+        user: true,
+        thread: true,
+      },
+      columns: {
+        id_comment: true,
+        id_user: true,
+        id_thread: true,
+        content: true,
+        publication_date: true,
+      },
+    });
+  }
   async getThreadComments(id: number) {
     return this.drizzle.query.comments.findMany({
       with: {

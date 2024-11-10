@@ -24,11 +24,11 @@
       <!-- List of Comments -->
       <ul
         *ngIf="comments.length > 0; else noComments"
-        class="comments-list space-y-6"
+        class="comments-list"
       >
-        <li *ngFor="let comment of comments" class="comment-item border-b py-4">
+        <li *ngFor="let comment of comments" class="comment-item">
           <p class="comment-content text-base mb-2">{{ comment.content }}</p>
-          <p class="comment-meta text-sm text-gray-500">
+          <p class="comment-meta">
             Posted by
             <a [routerLink]="['/profile-detail', comment.user.id]" class="text-secondary font-medium hover:underline">
               {{ comment.user.name }}

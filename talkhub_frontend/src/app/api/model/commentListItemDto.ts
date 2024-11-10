@@ -8,6 +8,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { CommentListItemThreadDto } from './commentListItemThreadDto';
 import { CommentListItemUserDto } from './commentListItemUserDto';
 
 
@@ -31,6 +32,6 @@ export interface CommentListItemDto {
     /**
      * The comment\'s thread
      */
-    thread: object;
+    thread: CommentListItemThreadDto;
 }
 

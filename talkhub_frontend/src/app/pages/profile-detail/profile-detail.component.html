@@ -18,14 +18,19 @@
       <!-- Comments Section -->
       <div class="comments-section">
         <h2 class="comments-title">Comments</h2>
-        <!--<ul *ngIf="user.comments?.length > 0; else noComments" class="comments-list">
-          <li *ngFor="let comment of user.comments" class="comment-item">
+        <ul *ngIf="comments.length > 0; else noComments" class="comments-list">
+          <li *ngFor="let comment of comments" class="comment-item">
             <p class="comment-content">{{ comment.content }}</p>
             <p class="comment-meta">
-              Posted on {{ comment.publication_date }} by <span class="comment-user">{{ user.name }}</span>
+              Posted on {{ comment.publication_date }} by 
+              <span class="comment-user"> {{ user.name }} </span> 
+              at 
+              <a [routerLink]="['/threads', comment.thread.id_thread]" class=" text-accent"> 
+                {{ comment.thread.title }} 
+              </a>  
             </p>
           </li>
-        </ul>-->
+        </ul>
   
         <!-- No Comments Placeholder -->
         <ng-template #noComments>

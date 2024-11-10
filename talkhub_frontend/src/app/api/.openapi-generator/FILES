@@ -15,6 +15,7 @@ model/categoryCreatedResultDto.ts
 model/categoryListItemDto.ts
 model/commentCreatedResultDto.ts
 model/commentListItemDto.ts
+model/commentListItemThreadDto.ts
 model/commentListItemUserDto.ts
 model/createCategoryDto.ts
 model/createCommentDto.ts

@@ -24,6 +24,28 @@ export class CommentListItemUserDto {
 }
 
 /**
+ * This class is a data transfer object for a comment's thread
+ */
+export class CommentListItemThreadDto {
+  /**
+   * The thread's id
+   */
+  @ApiProperty({
+    description: "The thread's id",
+    example: 1,
+  })
+  id_thread: number;
+
+  /**
+   * The thread's title
+   */
+  @ApiProperty({
+    description: "The thread's title",
+    example: 'title',
+  })
+  title: string;
+}
+/**
  * This class is a data transfer object for a comment
  */
 export class CommentListItemDto {
@@ -76,9 +98,7 @@ export class CommentListItemDto {
       id_thread: 1,
       title: 'Thread Title',
     },
+    type: CommentListItemThreadDto,
   })
-  thread: {
-    id_thread: number;
-    title: string;
-  };
+  thread: CommentListItemThreadDto;
 }

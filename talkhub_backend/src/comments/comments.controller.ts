@@ -42,6 +42,21 @@ export class CommentsController {
   }
 
   @ApiOperation({
+    description: 'Get all comments of a user',
+    operationId: 'getAllUserComments',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Comments found',
+    type: CommentListItemDto,
+  })
+  @ApiResponse({ status: 404, description: 'Thread not found' })
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.commentsService.getAllUserComments(id);
+  }
+
+  @ApiOperation({
     description: 'Create a new comment',
     operationId: 'createComment',
   })

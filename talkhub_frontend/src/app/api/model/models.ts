@@ -2,6 +2,7 @@ export * from './categoryCreatedResultDto';
 export * from './categoryListItemDto';
 export * from './commentCreatedResultDto';
 export * from './commentListItemDto';
+export * from './commentListItemThreadDto';
 export * from './commentListItemUserDto';
 export * from './createCategoryDto';
 export * from './createCommentDto';
