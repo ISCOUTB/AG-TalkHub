@@ -22,6 +22,7 @@ import { ThreadCreatedResultDto } from './dto/ThreadCreatedResultDto';
 import { ThreadListItemDto } from './dto/thread-list-item.dto';
 import { CommentsService } from 'src/comments/comments.service';
 import { CommentListItemDto } from 'src/comments/dto/comment-list-item.dto';
+import { ThreadDto } from './dto/thread.dto';
 
 @ApiBearerAuth()
 @ApiTags('threads')
@@ -64,7 +65,11 @@ export class ThreadsController {
     description: 'Get a thread by id',
     operationId: 'getThreadById',
   })
-  @ApiResponse({ status: 200, description: 'Thread found' })
+  @ApiResponse({
+    status: 200,
+    description: 'Thread found',
+    type: ThreadDto,
+  })
   @ApiResponse({ status: 404, description: 'Thread not found' })
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {

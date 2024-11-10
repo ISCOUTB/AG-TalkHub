@@ -38,7 +38,7 @@ export class ThreadsService extends Repository<
     });
   }
 
-  async getThreadById(id: number) {
+  async getThreadById(id: number): Promise<ThreadDto> {
     return this.drizzle.query.threads.findFirst({
       where: (threads, { eq }) => eq(threads.id_thread, id),
       with: {
@@ -46,6 +46,7 @@ export class ThreadsService extends Repository<
         category: true,
       },
       columns: {
+        id_thread: true,
         id_category: true,
         title: true,
         content: true,

@@ -8,6 +8,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ThreadUserDto } from './threadUserDto';
 
 
 export interface ThreadDto { 
@@ -24,12 +25,16 @@ export interface ThreadDto {
      */
     content: string;
     /**
-     * The thread\'s publication date
+     * The thread\'s user
      */
-    id_user: number;
+    user: ThreadUserDto;
     /**
      * The thread\'s category
      */
     id_category: number;
+    /**
+     * The thread\'s publication date
+     */
+    publication_date: string;
 }
 

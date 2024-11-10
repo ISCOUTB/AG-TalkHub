@@ -4,7 +4,12 @@
     <h1 class="thread-title text-4xl font-extrabold mb-6">
       {{ thread.title }}
     </h1>
-
+    <p class="thread-meta text-sm text-gray-500">
+      Posted by
+      <a [routerLink]="['/profile-detail', thread.user.id]" class="text-secondary font-medium hover:underline">
+        {{ thread.user.name }}
+      </a>
+      on {{ thread.publication_date }}
     <!-- Thread Content -->
     <p class="thread-body text-lg leading-relaxed mb-10">
       {{ thread.content }}
@@ -25,9 +30,9 @@
           <p class="comment-content text-base mb-2">{{ comment.content }}</p>
           <p class="comment-meta text-sm text-gray-500">
             Posted by
-            <span class="comment-user text-primary font-medium">{{
-              comment.user.name
-            }}</span>
+            <a [routerLink]="['/profile-detail', comment.user.id]" class="text-secondary font-medium hover:underline">
+              {{ comment.user.name }}
+              </a>
             on {{ comment.publication_date }}
           </p>
         </li>

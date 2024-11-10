@@ -24,9 +24,11 @@ model/loginDto.ts
 model/models.ts
 model/profileDto.ts
 model/threadCreatedResultDto.ts
+model/threadDto.ts
 model/threadListItemCategoryDto.ts
 model/threadListItemDto.ts
 model/threadListItemUserDto.ts
+model/threadUserDto.ts
 model/tokenDto.ts
 model/updateCategoryDto.ts
 model/updateCommentDto.ts

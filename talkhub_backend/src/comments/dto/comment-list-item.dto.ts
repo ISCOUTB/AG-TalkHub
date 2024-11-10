@@ -11,7 +11,7 @@ export class CommentListItemUserDto {
     description: "The user's id",
     example: 1,
   })
-  id_user: number;
+  id: number;
 
   /**
    * The user's name

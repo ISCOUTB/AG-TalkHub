@@ -37,7 +37,7 @@
           <a [routerLink]="['/threads', threads.id_thread]" class="text-accent hover:underline">{{ threads.title }}</a>
           <p class="text-sm text-primary">
             Posted by 
-            <a [routerLink]="['/profile-detail', threads.user.id]" class="text-primary font-medium hover:underline">
+            <a [routerLink]="['/profile-detail', threads.user.id]" class="text-secondary font-medium hover:underline">
             {{ threads.user.name }}
             </a> in {{ threads.category.name }} •
             {{ threads.publication_date }}
