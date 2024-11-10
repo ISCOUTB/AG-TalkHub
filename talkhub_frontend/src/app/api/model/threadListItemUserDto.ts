@@ -14,7 +14,7 @@ export interface ThreadListItemUserDto {
     /**
      * The user\'s id
      */
-    id_user: number;
+    id: number;
     /**
      * The user\'s name
      */

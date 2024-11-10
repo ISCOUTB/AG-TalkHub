@@ -17,3 +17,4 @@ export * from './tokenDto';
 export * from './updateCategoryDto';
 export * from './updateCommentDto';
 export * from './updateThreadDto';
+export * from './userDto';

@@ -10,41 +10,33 @@
  */
 
 
-export interface ProfileDto { 
+export interface UserDto { 
     /**
-     * The user\'s id
+     * The user ID
      */
     id: number;
     /**
-     * The user\'s email
-     */
-    email: string;
-    /**
-     * The user\'s name
+     * The user name
      */
     name: string;
     /**
-     * The user\'s role
+     * The user email
      */
-    role: ProfileDto.RoleEnum;
+    email: string;
     /**
-     * The user\'s bio
+     * The user bio
      */
     bio: string;
     /**
-     * The user\'s creation date
+     * The user creation date
      */
     creation_date: string;
     /**
-     * The time the token was issued
+     * The user role
      */
-    iat: number;
-    /**
-     * The time the token expires
-     */
-    exp: number;
+    role: UserDto.RoleEnum;
 }
-export namespace ProfileDto {
+export namespace UserDto {
     export type RoleEnum = 'admin' | 'regular' | 'moderator';
     export const RoleEnum = {
         Admin: 'admin' as RoleEnum,

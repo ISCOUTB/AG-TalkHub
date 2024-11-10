@@ -12,6 +12,7 @@ export class ProfileDto {
     example: 1,
   })
   id: number;
+
   /**
    * The user's email
    */
@@ -20,6 +21,43 @@ export class ProfileDto {
     example: 'example@talkhub.com',
   })
   email: string;
+
+  /**
+   * The user's name
+   */
+  @ApiProperty({
+    description: "The user's name",
+    example: 'John Doe',
+  })
+  name: string;
+
+  /**
+   * The user's role
+   */
+  @ApiProperty({
+    description: "The user's role",
+    example: 'regular',
+    enum: ['admin', 'regular', 'moderator'],
+  })
+  role: string;
+
+  /**
+   * The user's bio
+   */
+  @ApiProperty({
+    description: "The user's bio",
+    example: 'This is my bio',
+  })
+  bio: string;
+
+  /**
+   * The user's creation date
+   */
+  @ApiProperty({
+    description: "The user's creation date",
+    example: '2021-01-01',
+  })
+  creation_date: string;
   /**
    * The time the token was issued
    */

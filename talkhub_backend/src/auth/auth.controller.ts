@@ -7,6 +7,8 @@ import {
   Get,
   UseGuards,
   Request,
+  Param,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -22,6 +24,7 @@ import {
 import { LoginDto } from './dto/login.dto';
 import { TokenDto } from './dto/token.dto';
 import { ProfileDto } from './dto/profile.dto';
+import { UserDto } from 'src/users/dto/user.dto';
 
 @ApiTags('auth')
 @ApiBearerAuth()
@@ -53,8 +56,20 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 200, description: 'Profile data', type: ProfileDto })
   @Get('profile')
-  getProfile(@Request() req) {
+  getCurrentUserProfile(@Request() req) {
     return req.user;
+  }
+
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    description: 'Get user profile data by id',
+    operationId: 'profileById',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 200, description: 'Profile data', type: UserDto })
+  @Get('profileById/:id')
+  getProfileById(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.getUserProfileById(id);
   }
 
   @Public()

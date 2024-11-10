@@ -8,6 +8,7 @@ import { HashingService } from 'src/utils/hashing.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { RunResult } from 'better-sqlite3';
+import { UserDto } from './dto/user.dto';
 
 /**
  * UsersService class
@@ -41,6 +42,28 @@ export class UsersService extends Repository<
 
     const id = await super.insert(data);
     return id;
+  }
+
+  /**
+   * This method returns a record by id
+   * @param id Id of the record
+   * @returns The record
+   */
+  async getUserProfileById(id: number): Promise<UserDto> {
+    const user = await this.drizzle.query.users
+      .findFirst({
+        where: eq(schema.users.id, id),
+      })
+      .execute();
+
+    return new UserDto(
+      user.id,
+      user.name,
+      user.email,
+      user.bio,
+      user.creation_date,
+      user.role,
+    );
   }
 
   override async updateById(
