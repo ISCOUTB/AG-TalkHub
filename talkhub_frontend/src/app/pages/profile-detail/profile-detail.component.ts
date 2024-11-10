@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../api/user.service';
 import { UserDto } from '../../api/model/userDto';
+import { AuthService } from '../../api';
 
 @Component({
   selector: 'app-profile-detail',
@@ -16,20 +16,21 @@ export class ProfileDetailComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly userService: UserService
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    const userId = this.route.snapshot.paramMap.get('id');
-    if (userId) {
-      this.fetchUserData(parseInt(userId, 10));
+    const id_user = this.route.snapshot.paramMap.get('id');
+    if (id_user) {
+      this.fetchUserData(parseInt(id_user, 10));
     }
   }
 
-  fetchUserData(userId: number): void {
-    this.userService.getUserById(userId).subscribe({
+  fetchUserData(id: number): void {
+    this.authService.profileById(id).subscribe({
       next: (user) => {
         this.user = user;
+        console.log('API Response:', user);
       },
       error: (error) => {
         console.error('Error fetching user data', error);

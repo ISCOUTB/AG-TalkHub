@@ -11,7 +11,7 @@ export class ThreadListItemUserDto {
     description: "The user's id",
     example: 1,
   })
-  id_user: number;
+  id: number;
 
   /**
    * The user's name
