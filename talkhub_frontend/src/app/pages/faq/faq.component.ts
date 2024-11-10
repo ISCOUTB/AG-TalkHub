@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss'],
 })
@@ -16,13 +17,13 @@ export class FaqComponent {
       isOpen: false,
     },
     {
-      question: 'How can I reset my password?',
-      answer: 'Click on "Forgot Password" on the login page and follow the instructions to reset your password.',
+      question: 'Do I have to make an account to make comments?',
+      answer: 'To make comments and threads you need to create an account, to register just click the button in your sidebar',
       isOpen: false,
     },
     {
-      question: 'How do I change my profile picture?',
-      answer: 'Go to your profile settings and upload a new profile picture.',
+      question: 'How do I report someone for breaking the rules?',
+      answer: 'Go to the comment you want to report and click the button in the top right, a moderator will review it later.',
       isOpen: false,
     },
     // Add more FAQs as needed

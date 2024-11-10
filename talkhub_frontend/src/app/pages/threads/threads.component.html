@@ -5,9 +5,9 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div *ngFor="let thread of threads" class="thread-card animate-slideInUp">
       <div class="card h-full flex flex-col">
-        <div class="card-header">
+        <div class="thread-title">
           <h2 class="text-2xl text-accent font-semibold mb-2">{{ thread.title }}</h2>
-          <p class="text-sm text-primary mb-4">
+          <p class="text-sm text-neutral mb-4">
             Posted by 
             <a [routerLink]="['/profile-detail', thread.user.id]" class="text-secondary font-medium hover:underline">
             {{ thread.user.name }}
@@ -16,8 +16,8 @@
             {{ thread.publication_date }}
           </p>
         </div>
-        <div class="card-content flex-1">
-          <p class="text-neutral">{{ thread.content }}</p>
+        <div class="thread-content flex-1">
+          <p class="text-primary">{{ thread.content }}</p>
         </div>
         <div class="card-footer mt-4">
           <button
