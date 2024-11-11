@@ -6,9 +6,9 @@ import {
   HttpStatus,
   Get,
   UseGuards,
-  Request,
   Param,
   ParseIntPipe,
+  Patch,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -24,6 +24,8 @@ import {
 import { LoginDto } from './dto/login.dto';
 import { TokenDto } from './dto/token.dto';
 import { UserDto } from 'src/users/dto/user.dto';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
+import { RunResult } from 'better-sqlite3';
 
 @ApiTags('auth')
 @ApiBearerAuth()
@@ -47,20 +49,6 @@ export class AuthController {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
-  @UseGuards(AuthGuard)
-  @ApiOperation({
-    description: 'Get user profile data',
-    operationId: 'getCurrentUserProfile',
-  })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 200, description: 'Profile data', type: UserDto })
-  @Get('getCurrentUserProfile')
-  getCurrentUserProfile(@Request() req) {
-    const id = req.user.id;
-    return this.userService.getUserProfileById(id);
-  }
-
-  @UseGuards(AuthGuard)
   @ApiOperation({
     description: 'Get user profile data by id',
     operationId: 'profileById',
@@ -81,5 +69,24 @@ export class AuthController {
   @Post('register')
   async register(@Body() registerDto: CreateUserDto) {
     return this.userService.insert(registerDto);
+  }
+
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    description: 'Update user profile data',
+    operationId: 'updateProfileById',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({
+    status: 200,
+    description: 'Profile Updated',
+    type: UpdateUserDto,
+  })
+  @Patch('updateProfileById/:id')
+  async updateProfileById(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateUserDto,
+  ): Promise<RunResult> {
+    return this.userService.updateById(id, data);
   }
 }

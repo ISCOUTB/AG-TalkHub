@@ -33,6 +33,7 @@ model/tokenDto.ts
 model/updateCategoryDto.ts
 model/updateCommentDto.ts
 model/updateThreadDto.ts
+model/updateUserDto.ts
 model/userDto.ts
 param.ts
 variables.ts

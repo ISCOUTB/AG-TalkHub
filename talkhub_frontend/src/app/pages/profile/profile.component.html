@@ -1,39 +1,89 @@
 <div class="container mx-auto p-6 profile-container">
-    <div *ngIf="user" class="profile-card">
-      <!-- User Information Section -->
-      <div class="text-center">
-        <img src="https://via.placeholder.com/100" alt="User Avatar" class="profile-avatar mx-auto mb-4">
-        <h1 class="profile-title">{{ user.name }}</h1>
-        <p class="profile-role">Role: <span class="highlight">{{ user.role }}</span></p>
-        <p class="profile-email">Email: {{ user.email }}</p>
-        <p class="profile-joined">Joined on {{ user.creation_date }}</p>
-      </div>
-  
-      <!-- User Bio -->
-      <div *ngIf="user.bio" class="profile-bio">
-        <h2>Bio</h2>
-        <p>{{ user.bio }}</p>
-      </div>
-  
-      <!-- Comments Section -->
-      <div class="comments-section">
-        <h2 class="comments-title">Comments</h2>
-        <ul *ngIf="comments.length > 0; else noComments" class="comments-list">
-          <li *ngFor="let comment of comments" class="comment-item">
-            <p class="comment-content">{{ comment.content }}</p>
-            <p class="comment-meta">
-              Posted on {{ comment.publication_date }} by 
-              <span class="comment-user"> {{ user.name }} </span> 
-              at 
-              <a [routerLink]="['/threads', comment.thread.id_thread]" class=" text-accent"> 
-                {{ comment.thread.title }} 
-              </a>  
-            </p>
-          </li>
-        </ul>
-  
-        <!-- No Comments Placeholder -->
-        <ng-template #noComments>
-          <p class="text-center">No comments yet.</p>
-        </ng-template>
-      </div>
+  <div *ngIf="user" class="profile-card">
+    <!-- User Information Section -->
+    <div class="text-center">
+      <img
+        src=" "
+        alt="User Avatar"
+        class="profile-avatar mx-auto mb-4"
+      />
+      <h1 class="profile-title">{{ user.name }}</h1>
+      <p class="profile-role">
+        Role: <span class="highlight">{{ user.role }}</span>
+      </p>
+      <p class="profile-email">Email: {{ user.email }}</p>
+      <p class="profile-joined">Joined on {{ user.creation_date }}</p>
+    </div>
+    <!-- User Bio -->
+    <div class="profile-bio">
+      <h2>Bio</h2>
+      <p>{{ user.bio }}</p>
+    </div>
+
+    <div *ngIf="!editBio">
+      <button (click)="toggleEditBio()" class="btn btn-primary mb-4 mx-auto block">
+        Edit Bio
+      </button>
+    </div>
+
+    <div *ngIf="editBio">
+      <form [formGroup]="profileForm">
+        <div class="mb-4">
+          <textarea
+            type="content"
+            minlength="10"
+            maxlength="5000"
+            formControlName="content"
+            class="w-full px-3 py-2 border border-primary rounded-md"
+            rows="4"
+            placeholder="Write your bio here..."
+            required
+            #contentInput
+          ></textarea>
+        </div>
+        <button
+          type="button"
+          (click)="saveBio()"
+          class="btn btn-success"
+          [class.opacity-50]="profileForm.invalid"
+          [disabled]="profileForm.invalid"
+        >
+          Save Bio
+        </button>
+        <button
+          type="button"
+          (click)="toggleEditBio()"
+          class="btn btn-secondary ml-2"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Comments Section -->
+  <div class="comments-section">
+    <h2 class="comments-title">Comments</h2>
+    <ul *ngIf="comments.length > 0; else noComments" class="comments-list">
+      <li *ngFor="let comment of comments" class="comment-item">
+        <p class="comment-content">{{ comment.content }}</p>
+        <p class="comment-meta">
+          Posted on {{ comment.publication_date }} by
+          <span class="comment-user">{{ user?.name }}</span>
+          at
+          <a
+            [routerLink]="['/threads', comment.thread.id_thread]"
+            class="text-accent"
+          >
+            {{ comment.thread.title }}
+          </a>
+        </p>
+      </li>
+    </ul>
+
+    <!-- No Comments Placeholder -->
+    <ng-template #noComments>
+      <p class="text-center">No comments yet.</p>
+    </ng-template>
+  </div>
+</div>

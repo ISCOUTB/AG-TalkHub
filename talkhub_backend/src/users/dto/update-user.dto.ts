@@ -1,11 +1,5 @@
-import {
-  IsEmail,
-  IsIn,
-  IsOptional,
-  IsString,
-  MinLength,
-} from 'class-validator';
-
+import { IsEmail, IsIn, IsOptional, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 /**
  * This class is a data transfer object for creating a user
  * using class-validator
@@ -17,21 +11,20 @@ export class UpdateUserDto {
   @IsString()
   @IsEmail()
   @IsOptional()
+  @ApiProperty({
+    description: 'The user email',
+    example: 'example@talkhub.com',
+  })
   email: string;
-
-  /**
-   * The user's password
-   */
-  @IsString()
-  @MinLength(6)
-  @IsOptional()
-  password: string;
-
   /**
    * The user's name
    */
   @IsString()
   @IsOptional()
+  @ApiProperty({
+    description: 'The user name',
+    example: 'John Doe',
+  })
   name: string;
 
   /**
@@ -40,6 +33,11 @@ export class UpdateUserDto {
   @IsString()
   @IsIn(['admin', 'regular', 'moderator'])
   @IsOptional()
+  @ApiProperty({
+    description: "The user's role",
+    example: 'regular',
+    enum: ['admin', 'regular', 'moderator'],
+  })
   role: string;
 
   /**
@@ -47,5 +45,16 @@ export class UpdateUserDto {
    */
   @IsString()
   @IsOptional()
+  @ApiProperty({
+    description: "The user's bio",
+    example: 'I am a software engineer',
+  })
   bio: string;
+
+  constructor(name: string, email: string, bio: string, role: string) {
+    this.name = name;
+    this.email = email;
+    this.bio = bio;
+    this.role = role;
+  }
 }

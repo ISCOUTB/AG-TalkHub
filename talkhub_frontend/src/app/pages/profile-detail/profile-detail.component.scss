@@ -79,33 +79,6 @@
   }
 }
 
-.post-comment-section {
-  @apply bg-white rounded-lg shadow-lg p-6 mt-8;
-  h2 {
-    color: $color-primary;
-    @apply text-2xl font-semibold mb-4;
-  }
-  .textarea-comment {
-    @apply w-full p-4 rounded-lg border border-gray-300 mb-4;
-    resize: vertical;
-    transition: border-color 0.3s ease-in-out;
-    &:focus {
-      border-color: $color-secondary;
-      outline: none;
-    }
-  }
-  .btn-primary {
-    background-color: $color-primary;
-    color: $color-base-100;
-    @apply font-medium py-2 px-4 rounded shadow;
-    &:hover {
-      background-color: darken($color-primary, 10%);
-      transform: scale(1.05);
-    }
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
-}
-
 .loading-message {
   @apply text-center text-gray-500 text-lg mt-10;
 }

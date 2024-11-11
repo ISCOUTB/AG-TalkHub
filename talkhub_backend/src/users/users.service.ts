@@ -65,15 +65,4 @@ export class UsersService extends Repository<
       user.role,
     );
   }
-
-  override async updateById(
-    id: number,
-    data: UpdateUserDto,
-  ): Promise<RunResult> {
-    if (data.password) {
-      data.password = await this.hashingService.hashPassword(data.password);
-    }
-
-    return super.updateById(id, data);
-  }
 }

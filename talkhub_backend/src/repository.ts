@@ -53,7 +53,7 @@ export abstract class Repository<Row, InsertDto = Row, UpdateDto = Row> {
     return this.drizzleProd
       .update(this.tableSchema)
       .set(data)
-      .where(eq(this.tableSchema._.columns['id'], id))
+      .where(eq((this.tableSchema as any).id, id))
       .run();
   }
 
