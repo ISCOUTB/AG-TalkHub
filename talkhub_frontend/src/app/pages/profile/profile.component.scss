@@ -1,0 +1,112 @@
+@import '../../../styles.scss';
+
+.profile-container {
+  @apply bg-gradient-to-b from-gray-100 to-gray-200 p-6 rounded-lg;
+}
+
+.profile-card {
+  @apply bg-white shadow-2xl rounded-lg p-8;
+  max-width: 800px;
+  margin: 0 auto;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.profile-title {
+  color: $color-accent;
+  @apply text-4xl font-extrabold mb-2;
+}
+
+.profile-role, .profile-email, .profile-joined {
+  color: $color-neutral;
+  @apply text-lg font-medium mb-2;
+}
+
+.highlight {
+  color: $color-secondary;
+  font-weight: 500;
+}
+
+.profile-bio {
+  @apply mt-8 mb-10 text-center;
+  h2 {
+    color: $color-primary;
+    @apply text-2xl font-semibold mb-2;
+  }
+  p {
+    color: $color-primary;
+    @apply text-lg leading-relaxed;
+  }
+}
+
+.comments-section {
+  @apply bg-gray-100 rounded-lg p-6 shadow-inner mt-8;
+  .comments-title {
+    color: $color-accent;
+    @apply text-2xl font-semibold mb-4;
+  }
+  .comment-item {
+    @apply bg-white rounded-lg p-4 shadow-sm border border-gray-200;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+  .comment-content {
+    color: $color-primary;
+    @apply text-base mb-2;
+  }
+  .comment-meta {
+    color: $color-neutral;
+    @apply text-sm;
+    .comment-user {
+      color: $color-secondary;
+      font-weight: 500;
+    }
+  }
+}
+
+.post-comment-section {
+  @apply bg-white rounded-lg shadow-lg p-6 mt-8;
+  h2 {
+    color: $color-primary;
+    @apply text-2xl font-semibold mb-4;
+  }
+  .textarea-comment {
+    @apply w-full p-4 rounded-lg border border-gray-300 mb-4;
+    resize: vertical;
+    transition: border-color 0.3s ease-in-out;
+    &:focus {
+      border-color: $color-secondary;
+      outline: none;
+    }
+  }
+  .btn-primary {
+    background-color: $color-primary;
+    color: $color-base-100;
+    @apply font-medium py-2 px-4 rounded shadow;
+    &:hover {
+      background-color: darken($color-primary, 10%);
+      transform: scale(1.05);
+    }
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+}
+
+.loading-message {
+  @apply text-center text-gray-500 text-lg mt-10;
+}
+

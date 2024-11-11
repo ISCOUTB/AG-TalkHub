@@ -9,7 +9,6 @@ export * from './createCommentDto';
 export * from './createThreadDto';
 export * from './createUserDto';
 export * from './loginDto';
-export * from './profileDto';
 export * from './threadCreatedResultDto';
 export * from './threadDto';
 export * from './threadListItemCategoryDto';

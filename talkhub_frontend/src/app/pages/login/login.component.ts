@@ -64,7 +64,9 @@ export class LoginComponent {
           this.config.credentials['bearer'] = () => token;
 
           // Redirect to the home page
-          this.router.navigate(['/']);
+          this.router.navigate(['/']).then(() => {
+            window.location.reload();
+          });
         },
         error: (err) => {
           window.alert('Login failed');

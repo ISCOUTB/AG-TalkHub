@@ -23,7 +23,6 @@ model/createThreadDto.ts
 model/createUserDto.ts
 model/loginDto.ts
 model/models.ts
-model/profileDto.ts
 model/threadCreatedResultDto.ts
 model/threadDto.ts
 model/threadListItemCategoryDto.ts

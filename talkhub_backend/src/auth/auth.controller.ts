@@ -23,7 +23,6 @@ import {
 } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { TokenDto } from './dto/token.dto';
-import { ProfileDto } from './dto/profile.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 
 @ApiTags('auth')
@@ -51,13 +50,14 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @ApiOperation({
     description: 'Get user profile data',
-    operationId: 'profile',
+    operationId: 'getCurrentUserProfile',
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 200, description: 'Profile data', type: ProfileDto })
-  @Get('profile')
+  @ApiResponse({ status: 200, description: 'Profile data', type: UserDto })
+  @Get('getCurrentUserProfile')
   getCurrentUserProfile(@Request() req) {
-    return req.user;
+    const id = req.user.id;
+    return this.userService.getUserProfileById(id);
   }
 
   @UseGuards(AuthGuard)

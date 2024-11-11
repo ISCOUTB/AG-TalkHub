@@ -12,6 +12,7 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { ThreadDetailComponent } from './pages/thread-detail/thread-detail.component';
 import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 //import { CategoryDetailComponent } from './pages/category-detail/category-detail.component';
 
 export const routes: Routes = [
@@ -49,6 +50,10 @@ export const routes: Routes = [
   {
     path: 'threads',
     component: ThreadsComponent,
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
   },
   {
     path: 'profile-detail/:id',
