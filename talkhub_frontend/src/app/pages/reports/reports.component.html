@@ -1,30 +1,52 @@
 <div class="reports-page">
-    <div class="thread-card relative shadow-lg rounded-lg p-6 reports-container">
-      <!-- Left side: List of reports -->
-      <div class="reports-list" (scrolled)="loadReports()">
-        <h2 class="section-title">Reports</h2>
-        <div *ngFor="let report of reports" (click)="onSelectReport(report)" class="report-item">
-          <div class="report-title">{{ report.user.name }}</div>
-          <div class="text-accent">{{ report.reason }}</div>
-          <div class="report-snippet">{{ report.date }}</div>
+  <div class="thread-card relative shadow-lg rounded-lg p-6 reports-container">
+    <!-- Left side: List of reports -->
+    <div class="reports-list" (scrolled)="loadReports()">
+      <h2 class="section-title">Reports</h2>
+      <div *ngFor="let report of reports" class="relative report-item">
+        <div class="report-title">{{ report.user.name }}</div>
+        <div class="text-accent">{{ report.reason }}</div>
+        <div class="report-snippet">
+          {{ report.date }}
+          <button
+            class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent ml-4 absolute right-2"
+            (click)="onSelectReport(report)"
+          >
+            <svg
+              class="h-6 w-6 text-orange-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              />
+            </svg>
+          </button>
         </div>
-    
-        <div *ngIf="isLoading" class="loading-message">Loading...</div>
       </div>
-    
-      <!-- Right side: Report details -->
-      <div class="report-details" *ngIf="selectedReport">
-        <h2 class="section-title">Report Details</h2>
-        <div *ngIf="selectedReport" class="report-info">
-          <p><strong>Reported User:</strong> {{ selectedReportUser?.name }}</p>
-          <p><strong>Role:</strong> {{ selectedReportUser?.role }}</p>
-          <p><strong>Reason:</strong> {{ selectedReport.reason }}</p>
-          <p><strong>Comment:</strong> {{ selectedReportComment?.content }}</p>
-          <p><strong>Thread:</strong> 
-            <a [routerLink]="['/threads', selectedReportThread?.id_thread]">{{ selectedReportThread?.title }}</a>
-          </p>
-        </div>
+
+      <div *ngIf="isLoading" class="loading-message">Loading...</div>
+    </div>
+
+    <!-- Right side: Report details -->
+    <div class="report-details" *ngIf="selectedReport">
+      <h2 class="section-title">Report Details</h2>
+      <div *ngIf="selectedReport" class="report-info">
+        <p><strong>Reported User:</strong> {{ selectedReportUser?.name }}</p>
+        <p><strong>Role:</strong> {{ selectedReportUser?.role }}</p>
+        <p><strong>Reason:</strong> {{ selectedReport.reason }}</p>
+        <p><strong>Comment:</strong> {{ selectedReportComment?.content }}</p>
+        <p>
+          <strong>Thread:</strong>
+          <a [routerLink]="['/threads', selectedReportThread?.id_thread]">{{
+            selectedReportThread?.title
+          }}</a>
+        </p>
       </div>
     </div>
   </div>
-  
+</div>
