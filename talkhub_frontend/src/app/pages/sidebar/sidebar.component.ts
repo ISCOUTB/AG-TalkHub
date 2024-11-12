@@ -102,4 +102,7 @@ export class SidebarComponent {
   goToPopular() {
     this.router.navigate(['/popular']);
   }
+  goToReports() {
+    this.router.navigate(['/reports']);
+  }
 }

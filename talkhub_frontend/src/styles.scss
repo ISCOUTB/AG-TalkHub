@@ -2,20 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 /* Variables */
-$color-primary: #1F2937; /* Dark Gray */
-$color-secondary: #3B82F6; /* Blue */
-$color-accent: #F59E0B; /* Orange */
-$color-neutral: #6B7280; /* Muted Gray */
-$color-base-100: #FFFFFF; /* White */
-$color-base-200: #F3F4F6; /* Light Gray Background */
+$color-primary: #1f2937; /* Dark Gray */
+$color-secondary: #3b82f6; /* Blue */
+$color-accent: #f59e0b; /* Orange */
+$color-neutral: #6b7280; /* Muted Gray */
+$color-base-100: #ffffff; /* White */
+$color-base-200: #f3f4f6; /* Light Gray Background */
 $color-base-300: #a5a5a5;
 $border-radius: 8px;
 
 /* Base Styles */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: $color-base-200;
   color: $color-primary;
 
@@ -33,7 +33,12 @@ body {
   margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: $color-neutral;
   @apply font-semibold;
 }
@@ -49,8 +54,8 @@ button {
   color: $color-base-100;
   @apply font-medium py-2 px-4 rounded shadow;
   &:hover {
-      background-color: darken($color-primary, 10%);
-      transform: scale(1.05);
+    background-color: darken($color-primary, 10%);
+    transform: scale(1.05);
   }
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -103,11 +108,7 @@ button {
       font-weight: 500;
     }
   }
-  }
-
-  .text-center {
-    @apply text-neutral text-sm;
-  }
+}
 
 /* Post a Comment Section */
 .post-comment-section {
