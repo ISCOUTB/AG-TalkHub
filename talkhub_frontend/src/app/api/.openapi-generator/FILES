@@ -12,6 +12,7 @@ encoder.ts
 git_push.sh
 index.ts
 model/categoryCreatedResultDto.ts
+model/categoryDto.ts
 model/categoryListItemDto.ts
 model/commentCreatedResultDto.ts
 model/commentListItemDto.ts

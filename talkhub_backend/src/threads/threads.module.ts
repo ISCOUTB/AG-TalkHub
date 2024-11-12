@@ -7,5 +7,6 @@ import { CommentsModule } from 'src/comments/comments.module';
   controllers: [ThreadsController],
   providers: [ThreadsService],
   imports: [CommentsModule],
+  exports: [ThreadsService],
 })
 export class ThreadsModule {}

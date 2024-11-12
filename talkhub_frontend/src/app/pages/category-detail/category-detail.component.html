@@ -1,0 +1,49 @@
+<div class="container mx-auto p-6">
+  <div *ngIf="threads" class="thread-card shadow-lg rounded-lg p-6">
+    <!-- Category Title -->
+    <h1 class="thread-title text-4xl font-extrabold mb-6">
+      {{ category?.name }}
+    </h1>
+
+    <!-- Category Content -->
+    <p class="thread-body text-lg leading-relaxed mb-10">
+      {{ category?.description }}
+    </p>
+
+    <!-- Threads -->
+    <div class="comments-section">
+      <h2 class="comments-title text-2xl font-bold text-accent mb-4">
+        Threads
+      </h2>
+
+      <!-- List of Threads -->
+      <ul *ngIf="threads.length > 0; else noThreads" class="comments-list">
+        <li *ngFor="let threads of threads" class="comment-item">
+          <div class="thread-title">
+            <a [routerLink]="['/threads', threads.id_thread]" class="text-2xl text-accent font-semibold mb-2">
+              {{ threads.title }}
+            </a>
+            <p class="text-sm text-neutral mb-4">
+              Posted by
+              <a
+                [routerLink]="['/profile-detail', threads.user.id]"
+                class="text-secondary font-medium hover:underline"
+              >
+                {{ threads.user.name }}
+              </a>
+              {{ threads.category.name }} •
+              {{ threads.publication_date }}
+            </p>
+          </div>
+        </li>
+      </ul>
+
+      <!-- No Threads Template -->
+      <ng-template #noThreads>
+        <p class="text-center text-gray-500">
+          No threads yet. Be the first to make one!
+        </p>
+      </ng-template>
+    </div>
+  </div>
+</div>

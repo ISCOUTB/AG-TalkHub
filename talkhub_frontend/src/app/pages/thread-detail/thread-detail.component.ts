@@ -44,7 +44,6 @@ export class ThreadDetailComponent implements OnInit {
         this.thread = thread;
       },
       error: (error) => {
-        console.log('Thread details', this.thread);
         console.error('Error fetching thread details', error);
       },
     });

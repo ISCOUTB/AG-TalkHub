@@ -22,9 +22,21 @@ export class CategoriesService extends Repository<
   ) {
     super(drizzle, schema.categories);
   }
-
   async getAllTableItems() {
     return this.drizzle.query.categories.findMany({
+      columns: {
+        id_category: true,
+        name: true,
+        description: true,
+      },
+    });
+  }
+  async getCategoryById(id: number): Promise<CategoryDto> {
+    return this.drizzle.query.categories.findFirst({
+      where: (categories, { eq }) => eq(categories.id_category, id),
+      with: {
+        threads: true,
+      },
       columns: {
         id_category: true,
         name: true,

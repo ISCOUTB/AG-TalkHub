@@ -76,7 +76,7 @@
     <div *ngFor="let categories of categories">
       <ul>
         <li class="border-b border-secondary py-2">
-          <a href="#" class="text-accent hover:underline">{{ categories.name }}</a>
+          <a [routerLink]="['/categories', categories.id_category]" class="text-accent hover:underline">{{ categories.name }}</a>
           <p class="text-sm text-primary">
            {{ categories.description }}
           </p>

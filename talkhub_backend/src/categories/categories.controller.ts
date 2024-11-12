@@ -19,6 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { CategoryCreatedResultDto } from './dto/category-created-result.dto';
 import { CategoryListItemDto } from './dto/category-list-item.dto';
+import { CategoryDto } from './dto/category.dto';
 
 @ApiBearerAuth()
 @ApiTags('categories')
@@ -39,6 +40,22 @@ export class CategoriesController {
   findAll() {
     return this.categoriesService.getAllTableItems();
   }
+
+  @ApiOperation({
+    description: 'Get a category by id',
+    operationId: 'getCategoryById',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Category found',
+    type: CategoryDto,
+  })
+  @ApiResponse({ status: 404, description: 'Category not found' })
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.categoriesService.getCategoryById(id);
+  }
+
   @ApiOperation({
     description: 'Create a new category',
     operationId: 'createCategory',
@@ -56,6 +73,7 @@ export class CategoriesController {
     dto.id_category = Number(result.lastInsertRowid);
     return dto;
   }
+
   @ApiOperation({
     description: 'Update a category',
     operationId: 'updateCategory',
@@ -72,6 +90,7 @@ export class CategoriesController {
   ) {
     return this.categoriesService.updateById(id, updateCategoryDto);
   }
+
   @ApiOperation({
     description: 'Delete a category',
     operationId: 'deleteCategory',

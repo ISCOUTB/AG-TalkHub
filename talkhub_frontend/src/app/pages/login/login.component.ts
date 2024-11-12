@@ -63,8 +63,11 @@ export class LoginComponent {
           // Update the ApiModule's Configuration with the new token
           this.config.credentials['bearer'] = () => token;
 
-          // Redirect to the home page
-          this.router.navigate(['/'])
+            // Navigate to home page after successful login
+            this.router.navigate(['/'])
+            .then(() => {
+              window.location.reload();
+            });
         },
         error: (err) => {
           window.alert('Login failed');

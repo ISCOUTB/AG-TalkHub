@@ -5,7 +5,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         *ngFor="let category of categories"
-        class="category-card animate-slideInUp"
+        class="thread-card animate-slideInUp"
       >
         <div class="card h-full flex flex-col">
           <div class="card-header">
@@ -19,7 +19,7 @@
               class="btn-primary"
               [routerLink]="['/categories', category.id_category]"
             >
-              View Discussions
+              View Threads
             </button>
           </div>
         </div>

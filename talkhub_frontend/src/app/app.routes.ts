@@ -13,7 +13,8 @@ import { TermsComponent } from './pages/terms/terms.component';
 import { ThreadDetailComponent } from './pages/thread-detail/thread-detail.component';
 import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-//import { CategoryDetailComponent } from './pages/category-detail/category-detail.component';
+import { NewcategoryComponent } from './pages/newcategory/newcategory.component';
+import { CategoryDetailComponent } from './pages/category-detail/category-detail.component';
 
 export const routes: Routes = [
   {
@@ -41,12 +42,10 @@ export const routes: Routes = [
     path: 'categories',
     component: CategoriesComponent,
   },
-  /*
   {
     path: 'categories/:id',
     component: CategoryDetailComponent,
   },
-  */
   {
     path: 'threads',
     component: ThreadsComponent,
@@ -66,6 +65,10 @@ export const routes: Routes = [
   {
     path: 'newdiscussion',
     component: NewdiscussionComponent,
+  },
+  {
+    path: 'newcategory',
+    component: NewcategoryComponent,
   },
   {
     path: 'rules',

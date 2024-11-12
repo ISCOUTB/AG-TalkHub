@@ -37,7 +37,21 @@ export class ThreadsService extends Repository<
       },
     });
   }
-
+  async getThreadsByCategory(id: number) {
+    return this.drizzle.query.threads.findMany({
+      where: (threads, { eq }) => eq(threads.id_category, id),
+      with: {
+        user: true,
+        category: true,
+      },
+      columns: {
+        id_thread: true,
+        title: true,
+        content: true,
+        publication_date: true,
+      },
+    });
+  }
   async getThreadById(id: number): Promise<ThreadDto> {
     return this.drizzle.query.threads.findFirst({
       where: (threads, { eq }) => eq(threads.id_thread, id),

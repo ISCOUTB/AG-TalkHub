@@ -1,4 +1,5 @@
 export * from './categoryCreatedResultDto';
+export * from './categoryDto';
 export * from './categoryListItemDto';
 export * from './commentCreatedResultDto';
 export * from './commentListItemDto';

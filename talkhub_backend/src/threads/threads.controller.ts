@@ -48,6 +48,21 @@ export class ThreadsController {
   }
 
   @ApiOperation({
+    description: 'Get all threads of category',
+    operationId: 'getThreadsByCategory',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'All threads of category',
+    type: [ThreadListItemDto],
+  })
+  @ApiResponse({ status: 404, description: 'Category not found' })
+  @Get(':id/threads')
+  getThreadsByCategory(@Param('id', ParseIntPipe) id: number) {
+    return this.threadsService.getThreadsByCategory(id);
+  }
+
+  @ApiOperation({
     description: 'Get all comments of a thread',
     operationId: 'getThreadComments',
   })
