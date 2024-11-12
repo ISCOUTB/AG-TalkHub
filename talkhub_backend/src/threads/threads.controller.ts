@@ -23,6 +23,7 @@ import { ThreadListItemDto } from './dto/thread-list-item.dto';
 import { CommentsService } from 'src/comments/comments.service';
 import { CommentListItemDto } from 'src/comments/dto/comment-list-item.dto';
 import { ThreadDto } from './dto/thread.dto';
+import { Public } from 'src/auth/public-route.metadata';
 
 @ApiBearerAuth()
 @ApiTags('threads')
@@ -33,6 +34,7 @@ export class ThreadsController {
     private readonly commentsService: CommentsService,
   ) {}
 
+  @Public()
   @ApiOperation({
     description: 'Get all threads',
     operationId: 'getAllThreads',
@@ -47,6 +49,7 @@ export class ThreadsController {
     return this.threadsService.getAllTableItems();
   }
 
+  @Public()
   @ApiOperation({
     description: 'Get all threads of category',
     operationId: 'getThreadsByCategory',
@@ -62,6 +65,7 @@ export class ThreadsController {
     return this.threadsService.getThreadsByCategory(id);
   }
 
+  @Public()
   @ApiOperation({
     description: 'Get all comments of a thread',
     operationId: 'getThreadComments',
@@ -76,6 +80,7 @@ export class ThreadsController {
     return this.commentsService.getThreadComments(id);
   }
 
+  @Public()
   @ApiOperation({
     description: 'Get a thread by id',
     operationId: 'getThreadById',

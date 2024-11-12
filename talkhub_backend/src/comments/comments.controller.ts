@@ -20,6 +20,7 @@ import {
   ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
+import { Public } from 'src/auth/public-route.metadata';
 
 @ApiBearerAuth()
 @ApiTags('comments')
@@ -27,6 +28,7 @@ import {
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
+  @Public()
   @ApiOperation({
     description: 'Get all comments',
     operationId: 'getAllComments',
@@ -40,7 +42,7 @@ export class CommentsController {
   findAll() {
     return this.commentsService.getAllTableItems();
   }
-
+  @Public()
   @ApiOperation({
     description: 'Get all comments of a user',
     operationId: 'getAllUserComments',

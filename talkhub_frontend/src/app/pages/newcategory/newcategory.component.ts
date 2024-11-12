@@ -36,7 +36,7 @@ export class NewcategoryComponent {
     if (!token) {
       return;
     }
-    const authTokenPayload: { sub: number; email: string; exp: number } =
+    const authTokenPayload: { sub: number } =
       JSON.parse(atob(token.split('.')[1]));
     this.id = authTokenPayload.sub;
     this.authService.profileById(this.id).subscribe({

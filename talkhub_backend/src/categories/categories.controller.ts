@@ -20,6 +20,7 @@ import {
 import { CategoryCreatedResultDto } from './dto/category-created-result.dto';
 import { CategoryListItemDto } from './dto/category-list-item.dto';
 import { CategoryDto } from './dto/category.dto';
+import { Public } from 'src/auth/public-route.metadata';
 
 @ApiBearerAuth()
 @ApiTags('categories')
@@ -27,6 +28,7 @@ import { CategoryDto } from './dto/category.dto';
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
+  @Public()
   @ApiOperation({
     description: 'Get all categories',
     operationId: 'getAllCategories',
@@ -40,7 +42,7 @@ export class CategoriesController {
   findAll() {
     return this.categoriesService.getAllTableItems();
   }
-
+  @Public()
   @ApiOperation({
     description: 'Get a category by id',
     operationId: 'getCategoryById',

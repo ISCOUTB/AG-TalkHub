@@ -49,6 +49,7 @@ export class AuthController {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
+  @Public()
   @ApiOperation({
     description: 'Get user profile data by id',
     operationId: 'profileById',

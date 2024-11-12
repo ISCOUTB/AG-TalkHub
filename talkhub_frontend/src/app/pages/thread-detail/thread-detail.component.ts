@@ -16,6 +16,8 @@ export class ThreadDetailComponent implements OnInit {
   thread: ThreadDto | null = null;
   comments: CommentListItemDto[] = [];
   commentForm: FormGroup;
+  isLoggedIn = false;
+  id: number | null = null;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
   constructor(
@@ -35,9 +37,25 @@ export class ThreadDetailComponent implements OnInit {
     if (id_thread) {
       this.fetchThreadDetails(parseInt(id_thread, 10));
       this.fetchThreadComments(parseInt(id_thread, 10));
+      this.checkAuth();
     }
   }
 
+  checkAuth() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.isLoggedIn = false;
+      return;
+    }
+    const authTokenPayload: { sub: number; exp: number } =
+      JSON.parse(atob(token.split('.')[1]));
+    const expiryTimestampSeconds = authTokenPayload.exp;
+    this.id = authTokenPayload.sub;
+    const expiryTimestampMilliSeconds = expiryTimestampSeconds * 1000;
+
+    this.isLoggedIn = expiryTimestampMilliSeconds > Date.now();
+  
+  }
   fetchThreadDetails(id_thread: number): void {
     this.threadsService.getThreadById(id_thread).subscribe({
       next: (thread) => {
