@@ -42,11 +42,80 @@ export const votes = sqliteTable('votes', {
   type: integer('type'),
 });
 
+export const reports = sqliteTable('reports', {
+  id_report: integer('id_report').primaryKey(),
+  id_comment: integer('id_comment').references(() => comments.id_comment),
+  id_user: integer('id').references(() => users.id),
+  reason: text('reason'),
+  date: text('date'),
+});
+
+export const bans = sqliteTable('bans', {
+  id_ban: integer('id_ban').primaryKey(),
+  id_user: integer('id').references(() => users.id),
+  date: text('date'),
+  reason: text('reason'),
+});
+
+export const notifications = sqliteTable('notifications', {
+  id_notification: integer('id_notification').primaryKey(),
+  id_thread: integer('id_thread').references(() => threads.id_thread),
+  id_user: integer('id').references(() => users.id),
+  message: text('message'),
+  date: text('date'),
+});
+
+export const modaplications = sqliteTable('modaplications', {
+  id_modaplication: integer('id_modaplication').primaryKey(),
+  id_user: integer('id').references(() => users.id),
+  date: text('date'),
+  reason: text('reason'),
+});
+
 // Define relationships
-export const usersRelations = relations(users, ({ many }) => ({
+export const reportsRelations = relations(reports, ({ one }) => ({
+  user: one(users, {
+    fields: [reports.id_user],
+    references: [users.id],
+  }),
+  comment: one(comments, {
+    fields: [reports.id_comment],
+    references: [comments.id_comment],
+  }),
+}));
+
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  user: one(users, {
+    fields: [notifications.id_user],
+    references: [users.id],
+  }),
+  thread: one(threads, {
+    fields: [notifications.id_thread],
+    references: [threads.id_thread],
+  }),
+}));
+
+export const modaplicationsRelations = relations(modaplications, ({ one }) => ({
+  user: one(users, {
+    fields: [modaplications.id_user],
+    references: [users.id],
+  }),
+}));
+
+export const bansRelations = relations(bans, ({ one }) => ({
+  user: one(users, {
+    fields: [bans.id_user],
+    references: [users.id],
+  }),
+}));
+
+export const usersRelations = relations(users, ({ one, many }) => ({
   threads: many(threads),
   comments: many(comments),
   votes: many(votes),
+  reports: many(reports),
+  bans: one(bans),
+  modaplications: one(modaplications),
 }));
 
 export const categoriesRelations = relations(categories, ({ many }) => ({

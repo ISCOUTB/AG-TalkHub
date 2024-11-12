@@ -15,6 +15,7 @@ import { ProfileDetailComponent } from './pages/profile-detail/profile-detail.co
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NewcategoryComponent } from './pages/newcategory/newcategory.component';
 import { CategoryDetailComponent } from './pages/category-detail/category-detail.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 export const routes: Routes = [
   {
@@ -81,5 +82,9 @@ export const routes: Routes = [
   {
     path: 'faq',
     component: FaqComponent,
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
   },
 ];

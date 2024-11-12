@@ -13,6 +13,9 @@ import { ThreadsModule } from './threads/threads.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CommentsModule } from './comments/comments.module';
 import { VotesModule } from './votes/votes.module';
+import { ReportsModule } from './reports/reports.module';
+import { BansModule } from './bans/bans.module';
+import { ModaplicationsModule } from './modaplications/modaplications.module';
 config();
 
 @Module({
@@ -32,6 +35,9 @@ config();
     CategoriesModule,
     CommentsModule,
     VotesModule,
+    ReportsModule,
+    BansModule,
+    ModaplicationsModule,
   ],
   controllers: [AppController],
   providers: [AppService, MigrationService],

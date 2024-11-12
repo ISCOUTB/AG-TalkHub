@@ -21,6 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Public } from 'src/auth/public-route.metadata';
+import { CommentDto } from './dto/comment.dto';
 
 @ApiBearerAuth()
 @ApiTags('comments')
@@ -53,9 +54,24 @@ export class CommentsController {
     type: CommentListItemDto,
   })
   @ApiResponse({ status: 404, description: 'Thread not found' })
-  @Get(':id')
+  @Get(':id/users')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.commentsService.getAllUserComments(id);
+  }
+
+  @ApiOperation({
+    description: 'Get a comment by id',
+    operationId: 'getCommentById',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Comment found',
+    type: CommentDto,
+  })
+  @ApiResponse({ status: 404, description: 'Comment not found' })
+  @Get(':id')
+  getCommentById(@Param('id', ParseIntPipe) id: number) {
+    return this.commentsService.getCommentById(id);
   }
 
   @ApiOperation({

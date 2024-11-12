@@ -1,1 +1,30 @@
-<p>reports works!</p>
+<div class="reports-page">
+    <div class="thread-card relative shadow-lg rounded-lg p-6 reports-container">
+      <!-- Left side: List of reports -->
+      <div class="reports-list" (scrolled)="loadReports()">
+        <h2 class="section-title">Reports</h2>
+        <div *ngFor="let report of reports" (click)="onSelectReport(report)" class="report-item">
+          <div class="report-title">{{ report.user.name }}</div>
+          <div class="text-accent">{{ report.reason }}</div>
+          <div class="report-snippet">{{ report.date }}</div>
+        </div>
+    
+        <div *ngIf="isLoading" class="loading-message">Loading...</div>
+      </div>
+    
+      <!-- Right side: Report details -->
+      <div class="report-details" *ngIf="selectedReport">
+        <h2 class="section-title">Report Details</h2>
+        <div *ngIf="selectedReport" class="report-info">
+          <p><strong>Reported User:</strong> {{ selectedReportUser?.name }}</p>
+          <p><strong>Role:</strong> {{ selectedReportUser?.role }}</p>
+          <p><strong>Reason:</strong> {{ selectedReport.reason }}</p>
+          <p><strong>Comment:</strong> {{ selectedReportComment?.content }}</p>
+          <p><strong>Thread:</strong> 
+            <a [routerLink]="['/threads', selectedReportThread?.id_thread]">{{ selectedReportThread?.title }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
