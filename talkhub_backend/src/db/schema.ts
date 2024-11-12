@@ -36,6 +36,7 @@ export const comments = sqliteTable('comments', {
 
 export const votes = sqliteTable('votes', {
   id_vote: integer('id_vote').primaryKey(),
+  id_comment: integer('id_comment').references(() => comments.id_comment),
   id_thread: integer('id_thread').references(() => threads.id_thread),
   id_user: integer('id').references(() => users.id),
   type: integer('type'),
@@ -65,7 +66,7 @@ export const threadsRelations = relations(threads, ({ one, many }) => ({
   votes: many(votes),
 }));
 
-export const commentsRelations = relations(comments, ({ one }) => ({
+export const commentsRelations = relations(comments, ({ one, many }) => ({
   user: one(users, {
     fields: [comments.id_user],
     references: [users.id],
@@ -74,6 +75,7 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     fields: [comments.id_thread],
     references: [threads.id_thread],
   }),
+  votes: many(votes),
 }));
 
 export const votesRelations = relations(votes, ({ one }) => ({
@@ -82,7 +84,11 @@ export const votesRelations = relations(votes, ({ one }) => ({
     references: [users.id],
   }),
   thread: one(threads, {
-    fields: [votes.id_thread],
+    fields: [votes.id_comment],
     references: [threads.id_thread],
+  }),
+  comments: one(comments, {
+    fields: [votes.id_comment],
+    references: [comments.id_comment],
   }),
 }));

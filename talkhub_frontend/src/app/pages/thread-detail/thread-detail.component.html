@@ -1,5 +1,49 @@
 <div class="container mx-auto p-6">
-  <div *ngIf="thread" class="thread-card shadow-lg rounded-lg p-6">
+  <div *ngIf="thread" class="thread-card relative shadow-lg rounded-lg p-6">
+    <div class="flex justify-end absolute top-6 right-6 space-x-2">
+      <button 
+      class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent"
+      [class.text-green-600]="hasUserUpvoted()"
+      (click)="createVote(1, thread.id_thread, undefined)"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          fill="green"
+          stroke="green"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M11.47 2.47a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06l-2.47-2.47V21a.75.75 0 0 1-1.5 0V4.81L8.78 7.28a.75.75 0 0 1-1.06-1.06l3.75-3.75Z"
+          />
+        </svg>
+      </button>
+      <span class="text-green-600"> + {{ countUpvotes() }}</span>
+      <button 
+      class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent "
+      [class.text-red-600]="hasUserDownvoted()"
+      (click)="createVote(0, thread.id_thread, undefined)"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="red"
+          stroke-width="1.5"
+          stroke="red"
+          class="size-6"
+        >
+          <path
+            d="M12 2.25a.75.75 0 0 1 .75.75v16.19l2.47-2.47a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 1 1 1.06-1.06l2.47 2.47V3a.75.75 0 0 1 .75-.75Z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <span class="text-red-600"> - {{ countDownvotes() }}</span>
+    </div>
     <!-- Thread Title -->
     <h1 class="thread-title text-4xl font-extrabold mb-6">
       {{ thread.title }}
@@ -40,6 +84,51 @@
             </a>
             on {{ comment.publication_date }}
           </p>
+          <div class="flex justify-end mt-2 space-x-2">
+            <button 
+            class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent "
+            [class.text-green-600]="hasUserUpvotedComment(comment.id_comment)"
+            (click)="createVote(1, undefined, comment.id_comment)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                fill="green"
+                stroke="green"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.47 2.47a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06l-2.47-2.47V21a.75.75 0 0 1-1.5 0V4.81L8.78 7.28a.75.75 0 0 1-1.06-1.06l3.75-3.75Z"
+                />
+              </svg>
+            </button>
+            <span class="text-green-600"> + {{ countUpvotesForComment(comment.id_comment) }}</span>
+            
+            <button 
+            class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent "
+            [class.text-red-600]="hasUserDownvotedComment(comment.id_comment)"
+            (click)="createVote(0, undefined, comment.id_comment)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="red"
+                stroke-width="1.5"
+                stroke="red"
+                class="size-6"
+              >
+                <path
+                  d="M12 2.25a.75.75 0 0 1 .75.75v16.19l2.47-2.47a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 1 1 1.06-1.06l2.47 2.47V3a.75.75 0 0 1 .75-.75Z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <span class="text-red-600"> - {{ countDownvotesForComment(comment.id_comment) }}</span>
+          </div>
         </li>
       </ul>
 

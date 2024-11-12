@@ -8,4 +8,6 @@ export * from './default.service';
 import { DefaultService } from './default.service';
 export * from './threads.service';
 import { ThreadsService } from './threads.service';
-export const APIS = [AuthService, CategoriesService, CommentsService, DefaultService, ThreadsService];
+export * from './votes.service';
+import { VotesService } from './votes.service';
+export const APIS = [AuthService, CategoriesService, CommentsService, DefaultService, ThreadsService, VotesService];

@@ -6,17 +6,28 @@
     <div *ngFor="let thread of threads" class="thread-card animate-slideInUp">
       <div class="card h-full flex flex-col">
         <div class="thread-title">
-          <h2 class="text-2xl text-accent font-semibold mb-2">{{ thread.title }}</h2>
-          <p class="text-sm text-neutral mb-4">
-            Posted by 
-            <a [routerLink]="['/profile-detail', thread.user.id]" class="text-secondary font-medium hover:underline">
-            {{ thread.user.name }}
+          <h2 class="text-2xl text-accent font-semibold mb-2">
+            {{ thread.title }}
+          </h2>
+          <p class="text-sm comment-meta text-neutral mb-4">
+            Posted by
+            <a
+              [routerLink]="['/profile-detail', thread.user.id]"
+              class="text-secondary font-medium hover:underline"
+            >
+              {{ thread.user.name }}
             </a>
-            {{ thread.category.name }} •
-            {{ thread.publication_date }}
+              in
+            <a
+                [routerLink]="['/categories', thread.category.id_category]"
+                class="text-secondary font-medium hover:underline"
+              >
+                {{ thread.category.name }}
+              </a>
+              • {{ thread.publication_date }}
           </p>
         </div>
-        <div class="thread-content flex-1">
+        <div class="comment-content flex-1">
           <p class="text-primary">{{ thread.content }}</p>
         </div>
         <div class="card-footer mt-4">

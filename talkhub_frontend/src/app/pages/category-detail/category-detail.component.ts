@@ -7,7 +7,15 @@ import {
   CategoryDto,
   ThreadListItemDto,
   ThreadsService,
+  VoteListItemDto,
+  VotesService,
 } from '../../api';
+
+
+interface ThreadVoteStatus {
+  upvotes: number;
+  downvotes: number;
+}
 
 @Component({
   selector: 'app-category-detail',
@@ -19,11 +27,13 @@ import {
 export class CategoryDetailComponent {
   category: CategoryDto | null = null;
   threads: ThreadListItemDto[] = [];
-
+  votes: VoteListItemDto[] = [];
+  userThreadVotes: { [id_thread: number]: ThreadVoteStatus } = {};
   constructor(
     private readonly route: ActivatedRoute,
     private readonly threadsService: ThreadsService,
     private readonly categoryService: CategoriesService,
+    private readonly votesService: VotesService,
     private readonly formBuilder: FormBuilder
   ) {}
 
@@ -45,11 +55,31 @@ export class CategoryDetailComponent {
       },
     });
   }
-
+  CountThreadVotes(id_thread: number): void {
+    this.votesService.getAllThreadVotes(id_thread).subscribe({
+      next: (votes) => {
+        const upvotes = votes.filter((vote) => vote.type === 1).length;
+        const downvotes = votes.filter((vote) => vote.type === 0).length;
+        this.userThreadVotes[id_thread] = { upvotes, downvotes};
+      },
+      error: (error) => {
+        console.error('Error fetching votes', error);
+      },
+    });
+  }
+  CountThreadDownvotes(id_thread: number): number {
+    return this.userThreadVotes[id_thread].downvotes;
+  }
+  CountThreadUpvotes(id_thread: number): number {
+    return this.userThreadVotes[id_thread].upvotes;
+  }
   fetchCategoryThreads(id_category: number): void {
     this.threadsService.getThreadsByCategory(id_category).subscribe({
       next: (threads) => {
         this.threads = threads;
+        threads.forEach((thread) => {
+          this.CountThreadVotes(thread.id_thread);
+        });
       },
       error: (error) => {
         console.error('Error fetching threads', error);

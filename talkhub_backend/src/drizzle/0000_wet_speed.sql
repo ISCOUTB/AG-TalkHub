@@ -36,8 +36,10 @@ CREATE TABLE `users` (
 CREATE TABLE `votes` (
 	`id_vote` integer PRIMARY KEY NOT NULL,
 	`id_thread` integer,
+	`id_comment` integer,
 	`id` integer,
 	`type` integer,
+	FOREIGN KEY (`id_comment`) REFERENCES `comments`(`id_comment`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`id_thread`) REFERENCES `threads`(`id_thread`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );

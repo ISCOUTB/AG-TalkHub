@@ -34,13 +34,27 @@
     <div *ngFor="let threads of threads">
       <ul>
         <li class="border-b border-secondary py-2">
-          <a [routerLink]="['/threads', threads.id_thread]" class="text-accent hover:underline">{{ threads.title }}</a>
+          <a
+            [routerLink]="['/threads', threads.id_thread]"
+            class="text-accent hover:underline"
+            >{{ threads.title }}</a
+          >
           <p class="text-sm text-primary">
-            Posted by 
-            <a [routerLink]="['/profile-detail', threads.user.id]" class="text-primary font-medium hover:underline">
-            {{ threads.user.name }}
-            </a> in {{ threads.category.name }} •
-            {{ threads.publication_date }}
+            Posted by
+            <a
+              [routerLink]="['/profile-detail', threads.user.id]"
+              class="text-primary font-medium hover:underline"
+            >
+              {{ threads.user.name }}
+            </a>
+            in
+            <a
+              [routerLink]="['/categories', threads.category.id_category]"
+              class="text-primary font-medium hover:underline"
+            >
+              {{ threads.category.name }}
+            </a>
+            • {{ threads.publication_date }}
           </p>
         </li>
       </ul>
@@ -76,9 +90,13 @@
     <div *ngFor="let categories of categories">
       <ul>
         <li class="border-b border-secondary py-2">
-          <a [routerLink]="['/categories', categories.id_category]" class="text-accent hover:underline">{{ categories.name }}</a>
+          <a
+            [routerLink]="['/categories', categories.id_category]"
+            class="text-accent hover:underline"
+            >{{ categories.name }}</a
+          >
           <p class="text-sm text-primary">
-           {{ categories.description }}
+            {{ categories.description }}
           </p>
         </li>
       </ul>

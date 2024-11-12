@@ -7,6 +7,7 @@ api/categories.service.ts
 api/comments.service.ts
 api/default.service.ts
 api/threads.service.ts
+api/votes.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -22,6 +23,7 @@ model/createCategoryDto.ts
 model/createCommentDto.ts
 model/createThreadDto.ts
 model/createUserDto.ts
+model/createVoteDto.ts
 model/loginDto.ts
 model/models.ts
 model/threadCreatedResultDto.ts
@@ -35,6 +37,9 @@ model/updateCategoryDto.ts
 model/updateCommentDto.ts
 model/updateThreadDto.ts
 model/updateUserDto.ts
+model/updateVoteDto.ts
 model/userDto.ts
+model/voteCreatedResultDto.ts
+model/voteListItemDto.ts
 param.ts
 variables.ts
