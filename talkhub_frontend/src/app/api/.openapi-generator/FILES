@@ -7,6 +7,7 @@ api/bans.service.ts
 api/categories.service.ts
 api/comments.service.ts
 api/default.service.ts
+api/modaplications.service.ts
 api/reports.service.ts
 api/threads.service.ts
 api/votes.service.ts
@@ -27,11 +28,16 @@ model/commentListItemUserDto.ts
 model/createBanDto.ts
 model/createCategoryDto.ts
 model/createCommentDto.ts
+model/createModaplicationDto.ts
 model/createReportDto.ts
 model/createThreadDto.ts
 model/createUserDto.ts
 model/createVoteDto.ts
 model/loginDto.ts
+model/modAplicationDto.ts
+model/modAplicationListItemDto.ts
+model/modAplicationListItemUserDto.ts
+model/modaplicationCreatedResultDto.ts
 model/models.ts
 model/reportCreatedResultDto.ts
 model/reportDto.ts

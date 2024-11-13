@@ -63,27 +63,31 @@ export class LoginComponent {
           const authTokenPayload: { sub: number } = JSON.parse(
             atob(token.split('.')[1])
           );
+
           // Check if the user is banned
           this.bansService.getBanByUserId(authTokenPayload.sub).subscribe({
             next: (ban) => {
               if (ban) {
                 if (ban.id_user === authTokenPayload.sub) {
-                    alert('You are banned\nReason: ' + ban.reason + '\nDate: ' + ban.date);
+                  alert(
+                    'You are banned\nReason: ' +
+                      ban.reason +
+                      '\nDate: ' +
+                      ban.date
+                  );
                   return;
-                } else {
-                  // Update the ApiModule's Configuration with the new token
-                  this.config.credentials['bearer'] = () => token;
-
-                  // Navigate to home page after successful login
-                  this.router.navigate(['/']).then(() => {
-                    window.location.reload();
-                  });
                 }
               }
             },
           });
+          // Update the ApiModule's Configuration with the new token
+          this.config.credentials['bearer'] = () => token;
+          console.log('User is not banned');
+          this.router.navigate(['/']).then(() => {
+            window.location.reload();
+          });
         },
-        error: (err) => {
+        error: () => {
           window.alert('Login failed');
         },
       });

@@ -16,6 +16,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { NewcategoryComponent } from './pages/newcategory/newcategory.component';
 import { CategoryDetailComponent } from './pages/category-detail/category-detail.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { ModAppsComponent } from './pages/mod-apps/mod-apps.component';
+import { ApplyToModComponent } from './pages/apply-to-mod/apply-to-mod.component';
 
 export const routes: Routes = [
   {
@@ -86,5 +88,13 @@ export const routes: Routes = [
   {
     path: 'reports',
     component: ReportsComponent,
+  },
+  {
+    path: 'mod-apps',
+    component: ModAppsComponent,
+  },
+  {
+    path: 'apply',
+    component: ApplyToModComponent,
   },
 ];

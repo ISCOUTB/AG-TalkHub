@@ -147,7 +147,7 @@ export class ReportsComponent {
   }
 
   dismissReport() {
-    this.reportsService.deleteReport(this.selectedReport?.id_report || 0).subscribe({
+    this.reportsService.deleteReport(this.selectedReport?.id_report ?? 0).subscribe({
       next: () => {
         console.log('Report deleted');
         this.loadReports();

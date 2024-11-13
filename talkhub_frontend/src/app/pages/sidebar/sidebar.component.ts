@@ -105,4 +105,10 @@ export class SidebarComponent {
   goToReports() {
     this.router.navigate(['/reports']);
   }
+  goToModApps() {
+    this.router.navigate(['/mod-apps']);
+  }
+  goToApply() {
+    this.router.navigate(['/apply']);
+  }
 }
