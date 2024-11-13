@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import {
   CommentListItemDto,
   ThreadsService,
@@ -315,7 +315,7 @@ export class ThreadDetailComponent implements OnInit {
     this.reportsService
       .createReport({
         id_user: id_user,
-        id_reporting_user: this.id || 0,
+        id_reporting_user: this.id ?? 0,
         id_comment: id_comment,
         reason: this.reportForm.value.reason || '',
         date: new Date().toISOString().split('T')[0],

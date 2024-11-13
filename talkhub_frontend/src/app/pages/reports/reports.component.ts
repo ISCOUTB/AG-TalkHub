@@ -114,14 +114,14 @@ export class ReportsComponent {
   BanUser() {
     this.banService
       .createBan({
-        id_user: this.selectedReport?.id_user || 0,
-        reason: this.banReasonForm.value.reason || '',
+        id_user: this.selectedReport?.id_user ?? 0,
+        reason: this.banReasonForm.value.reason ?? '',
         date: new Date().toISOString().split('T')[0],
       })
       .subscribe({
         next: (response) => {
           console.log('User banned', response);
-          this.reportsService.deleteReport(this.selectedReport?.id_report || 0).subscribe({
+          this.reportsService.deleteReport(this.selectedReport?.id_report ?? 0).subscribe({
             next: () => {
               console.log('Report deleted');
               this.loadReports();
