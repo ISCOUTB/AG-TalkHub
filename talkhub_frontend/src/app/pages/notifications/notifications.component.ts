@@ -48,7 +48,6 @@ export class NotificationsComponent {
     if(!this.isUser){
       alert('You are not authorized to view this page');
       this.router.navigate(['/'], { replaceUrl: true });
-      return;
     }
 
   }

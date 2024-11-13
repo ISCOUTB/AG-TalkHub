@@ -59,7 +59,6 @@ export class ApplyToModComponent {
         if (user.role === 'moderator' || user.role === 'admin') {
           alert('You are already a moderator or admin!');
           this.router.navigate(['/'], { replaceUrl: true });
-          return;
         }
       },
       error: (error) => {
@@ -71,7 +70,7 @@ export class ApplyToModComponent {
     this.fetchUserRole();
     this.modAppsService
       .createModaplication({
-        id_user: this.id || 0,
+        id_user: this.id ?? 0,
         reason: this.newApplicationForm.value.reason || '',
         date: new Date().toISOString().split('T')[0],
       })
