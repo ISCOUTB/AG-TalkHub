@@ -3,32 +3,37 @@
     <!-- Left side: List of reports -->
     <div class="reports-list" (scrolled)="loadReports()">
       <h2 class="section-title">Reports</h2>
-      <div *ngFor="let report of reports" class="relative report-item">
-        <div class="report-title">{{ report.user.name }}</div>
-        <div class="text-accent">{{ report.reason }}</div>
-        <div class="report-snippet">
-          {{ report.date }}
-          <button
-            class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent ml-4 absolute right-2"
-            (click)="onSelectReport(report)"
-          >
-            <svg
-              class="h-6 w-6 text-orange-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      <ul *ngIf="reports.length > 0; else noReports">
+        <div *ngFor="let report of reports" class="relative report-item">
+          <div class="report-title">{{ report.user.name }}</div>
+          <div class="text-accent">{{ report.reason }}</div>
+          <div class="report-snippet">
+            {{ report.date }}
+            <button
+              class="p-0 bg-transparent border-none focus:outline-none hover:bg-transparent ml-4 absolute right-2"
+              (click)="onSelectReport(report)"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </button>
+              <svg
+                class="h-6 w-6 text-orange-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-
+      </ul>
+      <!-- No Reports Template -->
+      <ng-template #noReports>
+        <p class="text-center">No reports have been submitted yet.</p>
+      </ng-template>
       <div *ngIf="isLoading" class="loading-message">Loading...</div>
     </div>
 
@@ -46,7 +51,43 @@
             selectedReportThread?.title
           }}</a>
         </p>
+        <!-- Ban Button -->
+        <button class="btn-primary mt-4" (click)="openBanModal()">
+          Ban User
+        </button>
+        <!-- Dismiss Button -->
+        <button class="btn-secondary mt-4" (click)="dismissReport()">
+          Dismiss Report
+        </button>
       </div>
+    </div>
+  </div>
+  <!-- Confirmation Modal for Banning User -->
+  <div *ngIf="isBanModalOpen" class="modal-overlay">
+    <div class="modal">
+      <h2 class="text-xl font-bold mb-4">Confirm Ban</h2>
+      <p>Are you sure you want to ban this user?</p>
+      <form [formGroup]="banReasonForm">
+        <textarea
+          formControlName="reason"
+          rows="4"
+          placeholder="Describe the issue"
+          class="w-full p-2 border border-gray-300 rounded-lg"
+          required
+        ></textarea>
+        <div class="flex justify-end space-x-4 mt-6">
+          <button class="btn-secondary" (click)="closeBanModal()">
+            Cancel
+          </button>
+          <button
+            class="btn-primary"
+            (click)="confirmBan()"
+            [disabled]="banReasonForm.invalid"
+          >
+            Confirm
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

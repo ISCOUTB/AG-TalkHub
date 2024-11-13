@@ -1,3 +1,5 @@
+export * from './banCreatedResultDto';
+export * from './banDto';
 export * from './categoryCreatedResultDto';
 export * from './categoryDto';
 export * from './categoryListItemDto';
@@ -6,6 +8,7 @@ export * from './commentDto';
 export * from './commentListItemDto';
 export * from './commentListItemThreadDto';
 export * from './commentListItemUserDto';
+export * from './createBanDto';
 export * from './createCategoryDto';
 export * from './createCommentDto';
 export * from './createReportDto';

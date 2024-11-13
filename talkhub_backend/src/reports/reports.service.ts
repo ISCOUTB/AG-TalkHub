@@ -13,10 +13,6 @@ export class ReportsService extends Repository<
   CreateReportDto,
   DeleteReportDto
 > {
-  /**
-   * Create a new UsersService instance
-   * @param drizzle DrizzleBetterSQLite3Database instance
-   */
   constructor(
     @Inject('DB_PROD')
     public drizzle: BetterSQLite3Database<typeof schema>,
@@ -28,6 +24,7 @@ export class ReportsService extends Repository<
     return this.drizzle.query.reports.findMany({
       with: {
         user: true,
+        reporting_user: true,
         comment: true,
       },
       columns: {

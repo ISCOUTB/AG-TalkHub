@@ -8,8 +8,11 @@ import {
   VotesService,
   CreateVoteDto,
   UpdateVoteDto,
+  ReportsService,
+  BansService,
 } from '../../api';
 import { ThreadDto } from '../../api/model/threadDto';
+import { ReportDto } from '../../api/model/reportDto';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -39,23 +42,31 @@ export class ThreadDetailComponent implements OnInit {
   thread: ThreadDto | null = null;
   comments: CommentListItemDto[] = [];
   commentForm: FormGroup;
+  reportForm: FormGroup;
   votes: VoteListItemDto[] = [];
+  isReportModalOpen = false;
+  ReportedUser: ReportDto | null = null;
   userVotedThread = false;
   userVotedComment = false;
   isLoggedIn = false;
   id: number | null = null;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   userCommentVotes: { [id_comment: number]: CommentVoteStatus } = {};
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly threadsService: ThreadsService,
     private readonly formBuilder: FormBuilder,
     private readonly commentsService: CommentsService,
     private readonly votesService: VotesService,
-    private readonly router: Router
+    private readonly reportsService: ReportsService,
+    private readonly bansService: BansService
   ) {
     this.commentForm = this.formBuilder.group({
       content: ['', [Validators.required, Validators.minLength(2)]],
+    });
+    this.reportForm = this.formBuilder.group({
+      reason: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
 
@@ -86,7 +97,7 @@ export class ThreadDetailComponent implements OnInit {
     const expiryTimestampMilliSeconds = expiryTimestampSeconds * 1000;
     this.isLoggedIn = expiryTimestampMilliSeconds > Date.now();
   }
-
+  // Thread and Comment functions
   fetchThreadDetails(id_thread: number): void {
     this.threadsService.getThreadById(id_thread).subscribe({
       next: (thread) => {
@@ -111,7 +122,26 @@ export class ThreadDetailComponent implements OnInit {
       },
     });
   }
-
+  createComment() {
+    this.commentsService
+      .createComment({
+        content: this.commentForm.value.content || '',
+        id_thread: parseInt(this.route.snapshot.params['id'], 10) || 0,
+        publication_date: new Date().toISOString().split('T')[0],
+      })
+      .subscribe({
+        next: () => {
+          this.fetchThreadComments(
+            parseInt(this.route.snapshot.params['id'], 10)
+          );
+          this.commentForm.reset();
+        },
+        error: (error) => {
+          console.error('Error creating comment', error);
+        },
+      });
+  }
+  // Vote functions
   fetchThreadVotes(id_thread: number): void {
     this.votesService.getAllThreadVotes(id_thread).subscribe({
       next: (votes) => {
@@ -164,37 +194,16 @@ export class ThreadDetailComponent implements OnInit {
   countDownvotesForComment(id_comment: number): number {
     return this.userCommentVotes[id_comment]?.downvotes || 0;
   }
-  createComment() {
-    this.commentsService
-      .createComment({
-        content: this.commentForm.value.content || '',
-        id_thread: parseInt(this.route.snapshot.params['id'], 10) || 0,
-        publication_date: new Date().toISOString().split('T')[0],
-      })
-      .subscribe({
-        next: () => {
-          this.fetchThreadComments(
-            parseInt(this.route.snapshot.params['id'], 10)
-          );
-          this.commentForm.reset();
-        },
-        error: (error) => {
-          console.error('Error creating comment', error);
-        },
-      });
+  hasUserDownvoted(): boolean {
+    return this.votes.some(
+      (vote) => vote.id_user === this.id && vote.type === 0
+    );
   }
   hasUserUpvoted(): boolean {
     return this.votes.some(
       (vote) => vote.id_user === this.id && vote.type === 1
     );
   }
-
-  hasUserDownvoted(): boolean {
-    return this.votes.some(
-      (vote) => vote.id_user === this.id && vote.type === 0
-    );
-  }
-
   hasUserUpvotedComment(commentId: number): boolean {
     return this.userCommentVotes[commentId]?.upvotes === 1;
   }
@@ -202,7 +211,6 @@ export class ThreadDetailComponent implements OnInit {
   hasUserDownvotedComment(commentId: number): boolean {
     return this.userCommentVotes[commentId]?.downvotes === 0;
   }
-
   async createVote(
     voteType: 0 | 1,
     idThread: number | undefined = undefined,
@@ -225,7 +233,6 @@ export class ThreadDetailComponent implements OnInit {
       if (existingVote) {
         const voteDto: UpdateVoteDto = {
           type: voteType,
-          id_user: this.id,
           id_thread: idThread,
           id_comment: undefined,
         };
@@ -272,20 +279,17 @@ export class ThreadDetailComponent implements OnInit {
       if (existingVote) {
         const voteDto: UpdateVoteDto = {
           type: voteType,
-          id_user: this.id,
           id_thread: undefined,
           id_comment: idComment,
         };
-        this.votesService
-          .updateVote(existingVote.id_vote, voteDto)
-          .subscribe({
-            next: () => {
-              this.fetchCommentVotesCount(idComment);
-            },
-            error: (error) => {
-              console.error('Error updating vote:', error);
-            },
-          });
+        this.votesService.updateVote(existingVote.id_vote, voteDto).subscribe({
+          next: () => {
+            this.fetchCommentVotesCount(idComment);
+          },
+          error: (error) => {
+            console.error('Error updating vote:', error);
+          },
+        });
         return;
       }
       const voteDto: CreateVoteDto = {
@@ -304,6 +308,56 @@ export class ThreadDetailComponent implements OnInit {
           console.error('Error creating comment vote:', error);
         },
       });
+    }
+  }
+  // Report functions
+  createReport(id_user: number, id_comment: number) {
+    this.reportsService
+      .createReport({
+        id_user: id_user,
+        id_reporting_user: this.id || 0,
+        id_comment: id_comment,
+        reason: this.reportForm.value.reason || '',
+        date: new Date().toISOString().split('T')[0],
+      })
+      .subscribe({
+        next: () => {
+          console.log('Report created successfully');
+        },
+        error: (error) => {
+          console.error('Error creating report:', error);
+        },
+      });
+  }
+  openReportModal(id_user: number, id_comment: number): void {
+    this.bansService.getBanByUserId(id_user).subscribe({
+      next: (ban) => {
+        if (ban) {
+          if (ban.id_user === id_user) {
+            alert('User is already banned');
+            return;
+          } else {
+            this.ReportedUser = {
+              id_user: id_user,
+              id_comment: id_comment,
+            } as ReportDto;
+            this.isReportModalOpen = true;
+            this.reportForm.reset();
+          }
+        }
+      },
+    });
+  }
+  closeReportModal(): void {
+    this.isReportModalOpen = false;
+  }
+  submitReport(): void {
+    if (this.ReportedUser) {
+      this.createReport(
+        this.ReportedUser.id_user,
+        this.ReportedUser.id_comment
+      );
+      this.closeReportModal();
     }
   }
 }

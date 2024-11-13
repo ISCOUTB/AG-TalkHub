@@ -1,5 +1,7 @@
 export * from './auth.service';
 import { AuthService } from './auth.service';
+export * from './bans.service';
+import { BansService } from './bans.service';
 export * from './categories.service';
 import { CategoriesService } from './categories.service';
 export * from './comments.service';
@@ -12,4 +14,4 @@ export * from './threads.service';
 import { ThreadsService } from './threads.service';
 export * from './votes.service';
 import { VotesService } from './votes.service';
-export const APIS = [AuthService, CategoriesService, CommentsService, DefaultService, ReportsService, ThreadsService, VotesService];
+export const APIS = [AuthService, BansService, CategoriesService, CommentsService, DefaultService, ReportsService, ThreadsService, VotesService];

@@ -10,18 +10,10 @@
  */
 
 
-export interface UpdateVoteDto { 
+export interface BanCreatedResultDto { 
     /**
-     * The thread id
+     * The ban\'s id
      */
-    id_thread?: number;
-    /**
-     * The comment id
-     */
-    id_comment?: number;
-    /**
-     * The vote type
-     */
-    type: number;
+    id_ban: number;
 }
 

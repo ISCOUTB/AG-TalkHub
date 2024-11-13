@@ -6,7 +6,6 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Req,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -66,8 +65,7 @@ export class ReportsController {
   })
   @ApiResponse({ status: 404, description: 'Comment not found' })
   @Post()
-  async createReport(@Body() createReportDto: CreateReportDto, @Req() req) {
-    createReportDto.id_user = req.user.sub;
+  async createReport(@Body() createReportDto: CreateReportDto) {
     const result = await this.reportsService.insert(createReportDto);
     const dto = new ReportCreatedResultDto();
     dto.id_report = Number(result.lastInsertRowid);

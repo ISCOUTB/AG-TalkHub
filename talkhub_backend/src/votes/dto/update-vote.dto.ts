@@ -3,13 +3,6 @@ import { IsNumber, IsOptional } from 'class-validator';
 
 export class UpdateVoteDto {
   @IsNumber()
-  @ApiProperty({
-    description: 'The user id',
-    example: 1,
-  })
-  id_user: number;
-
-  @IsNumber()
   @IsOptional()
   @ApiProperty({
     description: 'The thread id',
@@ -35,12 +28,10 @@ export class UpdateVoteDto {
   type: number;
 
   constructor(
-    id_user: number,
     type: number,
     id_thread: number | undefined,
     id_comment: number | undefined,
   ) {
-    this.id_user = id_user;
     this.id_thread = id_thread;
     this.id_comment = id_comment;
     this.type = type;

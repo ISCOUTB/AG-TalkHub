@@ -3,6 +3,7 @@ README.md
 api.module.ts
 api/api.ts
 api/auth.service.ts
+api/bans.service.ts
 api/categories.service.ts
 api/comments.service.ts
 api/default.service.ts
@@ -13,6 +14,8 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/banCreatedResultDto.ts
+model/banDto.ts
 model/categoryCreatedResultDto.ts
 model/categoryDto.ts
 model/categoryListItemDto.ts
@@ -21,6 +24,7 @@ model/commentDto.ts
 model/commentListItemDto.ts
 model/commentListItemThreadDto.ts
 model/commentListItemUserDto.ts
+model/createBanDto.ts
 model/createCategoryDto.ts
 model/createCommentDto.ts
 model/createReportDto.ts

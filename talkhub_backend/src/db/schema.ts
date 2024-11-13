@@ -46,6 +46,7 @@ export const reports = sqliteTable('reports', {
   id_report: integer('id_report').primaryKey(),
   id_comment: integer('id_comment').references(() => comments.id_comment),
   id_user: integer('id').references(() => users.id),
+  id_reporting_user: integer('id_reporting_user').references(() => users.id),
   reason: text('reason'),
   date: text('date'),
 });
@@ -76,6 +77,10 @@ export const modaplications = sqliteTable('modaplications', {
 export const reportsRelations = relations(reports, ({ one }) => ({
   user: one(users, {
     fields: [reports.id_user],
+    references: [users.id],
+  }),
+  reporting_user: one(users, {
+    fields: [reports.id_reporting_user],
     references: [users.id],
   }),
   comment: one(comments, {

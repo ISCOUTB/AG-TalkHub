@@ -34,6 +34,16 @@ export class CreateReportDto {
   id_user: number;
 
   /**
+   * The report's reporting user
+   */
+  @IsNumber()
+  @ApiProperty({
+    description: "The report's reporting user",
+    example: 1,
+  })
+  id_reporting_user: number;
+
+  /**
    * The report's comment
    */
   @IsNumber()

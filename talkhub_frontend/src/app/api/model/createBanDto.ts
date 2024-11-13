@@ -10,26 +10,18 @@
  */
 
 
-export interface CreateReportDto { 
+export interface CreateBanDto { 
     /**
-     * The report\'s reason
+     * The ban\'s reason
      */
     reason: string;
     /**
-     * The report\'s date
+     * The ban\'s date
      */
     date: string;
     /**
-     * The report\'s user
+     * The banned user
      */
     id_user: number;
-    /**
-     * The report\'s reporting user
-     */
-    id_reporting_user: number;
-    /**
-     * The report\'s comment
-     */
-    id_comment: number;
 }
 
