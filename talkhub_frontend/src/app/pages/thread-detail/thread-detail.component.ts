@@ -10,6 +10,7 @@ import {
   UpdateVoteDto,
   ReportsService,
   BansService,
+  NotificationsService,
 } from '../../api';
 import { ThreadDto } from '../../api/model/threadDto';
 import { ReportDto } from '../../api/model/reportDto';
@@ -60,7 +61,8 @@ export class ThreadDetailComponent implements OnInit {
     private readonly commentsService: CommentsService,
     private readonly votesService: VotesService,
     private readonly reportsService: ReportsService,
-    private readonly bansService: BansService
+    private readonly bansService: BansService,
+    private readonly notificationsService: NotificationsService,
   ) {
     this.commentForm = this.formBuilder.group({
       content: ['', [Validators.required, Validators.minLength(2)]],
@@ -131,6 +133,21 @@ export class ThreadDetailComponent implements OnInit {
       })
       .subscribe({
         next: () => {
+          if(this.thread){
+            this.notificationsService.createNotification({
+              id_user: this.thread.user.id,
+              id_thread: parseInt(this.route.snapshot.params['id'], 10),
+              message: 'New comment on your thread',
+              date: new Date().toISOString().split('T')[0],
+            }).subscribe({
+              next: () => {
+                console.log('Notification created successfully');
+              },
+              error: (error) => {
+                console.error('Error creating notification', error);
+              },
+            });
+          }
           this.fetchThreadComments(
             parseInt(this.route.snapshot.params['id'], 10)
           );

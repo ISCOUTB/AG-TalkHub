@@ -10,7 +10,7 @@
  */
 
 
-export interface CreateModaplicationDto { 
+export interface CreateModAplicationDto { 
     /**
      * The aplicant\'s id
      */

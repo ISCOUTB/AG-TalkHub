@@ -10,10 +10,14 @@
  */
 
 
-export interface ModAplicationCreatedResultDto { 
+export interface NotificationUserListItemDto { 
     /**
-     * The modaplication\'s id
+     * The user\'s id
      */
-    id_modaplication: number;
+    id: number;
+    /**
+     * The user\'s name
+     */
+    name: string;
 }
 

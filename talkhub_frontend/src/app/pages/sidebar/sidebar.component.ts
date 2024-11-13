@@ -111,4 +111,9 @@ export class SidebarComponent {
   goToApply() {
     this.router.navigate(['/apply']);
   }
+  goToNotifications() {
+    if (this.id) {
+      this.router.navigate([`/notifications/${this.id}`]);
+    }
+  }
 }

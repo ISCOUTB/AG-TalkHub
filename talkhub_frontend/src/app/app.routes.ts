@@ -18,6 +18,7 @@ import { CategoryDetailComponent } from './pages/category-detail/category-detail
 import { ReportsComponent } from './pages/reports/reports.component';
 import { ModAppsComponent } from './pages/mod-apps/mod-apps.component';
 import { ApplyToModComponent } from './pages/apply-to-mod/apply-to-mod.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
 
 export const routes: Routes = [
   {
@@ -96,5 +97,9 @@ export const routes: Routes = [
   {
     path: 'apply',
     component: ApplyToModComponent,
+  },
+  {
+    path: 'notifications/:id',
+    component: NotificationsComponent,
   },
 ];

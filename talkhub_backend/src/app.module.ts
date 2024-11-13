@@ -16,6 +16,7 @@ import { VotesModule } from './votes/votes.module';
 import { ReportsModule } from './reports/reports.module';
 import { BansModule } from './bans/bans.module';
 import { ModaplicationsModule } from './modaplications/modaplications.module';
+import { NotificationsModule } from './notifications/notifications.module';
 config();
 
 @Module({
@@ -38,6 +39,7 @@ config();
     ReportsModule,
     BansModule,
     ModaplicationsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService, MigrationService],

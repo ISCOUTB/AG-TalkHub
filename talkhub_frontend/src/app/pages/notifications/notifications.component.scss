@@ -1,1 +1,33 @@
-@import '../../../styles.scss';
+@import "../../../styles.scss";
+.notifications-page {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f3f4f6; /* Light gray background */
+}
+
+.notifications-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 16px;
+  background-color: #ffffff; /* White card background */
+  border-radius: 8px;
+  border: 2px solid $color-primary;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: $color-base-100;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid $color-accent;
+  transition: background-color 0.3s ease-in-out
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #6b7280; /* Neutral gray */
+}

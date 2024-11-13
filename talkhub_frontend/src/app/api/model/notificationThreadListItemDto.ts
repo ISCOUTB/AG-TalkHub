@@ -10,10 +10,14 @@
  */
 
 
-export interface ModAplicationCreatedResultDto { 
+export interface NotificationThreadListItemDto { 
     /**
-     * The modaplication\'s id
+     * The thread\'s id
      */
-    id_modaplication: number;
+    id_thread: number;
+    /**
+     * The thread\'s title
+     */
+    title: string;
 }
 
