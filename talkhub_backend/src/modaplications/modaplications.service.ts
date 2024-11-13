@@ -20,7 +20,7 @@ export class ModAplicationsService extends Repository<
     super(drizzle, schema.modaplications);
   }
 
-  async getAllModaplications() {
+  async getAllModAplications() {
     return this.drizzle.query.modaplications.findMany({
       with: {
         user: true,
@@ -41,7 +41,7 @@ export class ModAplicationsService extends Repository<
       .run();
   }
 
-  async getModaplicationById(id: number): Promise<ModAplicationDto> {
+  async getModAplicationById(id: number): Promise<ModAplicationDto> {
     return this.drizzle.query.modaplications.findFirst({
       where: (modaplications, { eq }) =>
         eq(modaplications.id_modaplication, id),

@@ -45,6 +45,21 @@ export class UsersService extends Repository<
   }
 
   /**
+   * This method updates a record by id
+   * @param id Id of the record
+   * @param data Data to update
+   */
+  async updatePasswordById(id: number, password: string): Promise<RunResult> {
+    const hashedPassword = await this.hashingService.hashPassword(password);
+
+    return this.drizzle
+      .update(schema.users)
+      .set({ password: hashedPassword })
+      .where(eq(schema.users.id, id))
+      .run();
+  }
+
+  /**
    * This method returns a record by id
    * @param id Id of the record
    * @returns The record

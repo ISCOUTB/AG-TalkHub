@@ -62,7 +62,7 @@ export class ThreadDetailComponent implements OnInit {
     private readonly votesService: VotesService,
     private readonly reportsService: ReportsService,
     private readonly bansService: BansService,
-    private readonly notificationsService: NotificationsService,
+    private readonly notificationsService: NotificationsService
   ) {
     this.commentForm = this.formBuilder.group({
       content: ['', [Validators.required, Validators.minLength(2)]],
@@ -133,20 +133,22 @@ export class ThreadDetailComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          if(this.thread){
-            this.notificationsService.createNotification({
-              id_user: this.thread.user.id,
-              id_thread: parseInt(this.route.snapshot.params['id'], 10),
-              message: 'New comment on your thread',
-              date: new Date().toISOString().split('T')[0],
-            }).subscribe({
-              next: () => {
-                console.log('Notification created successfully');
-              },
-              error: (error) => {
-                console.error('Error creating notification', error);
-              },
-            });
+          if (this.thread) {
+            this.notificationsService
+              .createNotification({
+                id_user: this.thread.user.id,
+                id_thread: parseInt(this.route.snapshot.params['id'], 10),
+                message: 'New comment on your thread',
+                date: new Date().toISOString().split('T')[0],
+              })
+              .subscribe({
+                next: () => {
+                  console.log('Notification created successfully');
+                },
+                error: (error) => {
+                  console.error('Error creating notification', error);
+                },
+              });
           }
           this.fetchThreadComments(
             parseInt(this.route.snapshot.params['id'], 10)
@@ -346,24 +348,21 @@ export class ThreadDetailComponent implements OnInit {
         },
       });
   }
-  openReportModal(id_user: number, id_comment: number): void {
-    this.bansService.getBanByUserId(id_user).subscribe({
-      next: (ban) => {
-        if (ban) {
-          if (ban.id_user === id_user) {
-            alert('User is already banned');
-            return;
-          } else {
-            this.ReportedUser = {
-              id_user: id_user,
-              id_comment: id_comment,
-            } as ReportDto;
-            this.isReportModalOpen = true;
-            this.reportForm.reset();
-          }
-        }
-      },
-    });
+  async openReportModal(id_user: number, id_comment: number) {
+    const ban = await firstValueFrom(this.bansService.getBanByUserId(id_user));
+
+    if (ban && ban.id_user === id_user) {
+      if (ban.id_user === id_user) {
+        alert('User is already banned');
+        return;
+      }
+    }
+    this.ReportedUser = {
+      id_user: id_user,
+      id_comment: id_comment,
+    } as ReportDto;
+    this.isReportModalOpen = true;
+    this.reportForm.reset();
   }
   closeReportModal(): void {
     this.isReportModalOpen = false;

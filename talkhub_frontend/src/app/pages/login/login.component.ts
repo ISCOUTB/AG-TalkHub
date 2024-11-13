@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 /**
  * Login component
@@ -46,50 +47,50 @@ export class LoginComponent {
   /**
    * Login the user
    */
-  login() {
-    // Call the login API
-    this.authService
-      .login({
-        email: this.loginForm.value.email || '',
-        password: this.loginForm.value.password || '',
-      })
-      .subscribe({
-        next: (response) => {
-          // Assuming the response contains a token (e.g., response.token)
-          const token = response.access_token;
+  async login() {
+    try {
+      // Call the login API and await the response
+      const response = await firstValueFrom(
+        this.authService.login({
+          email: this.loginForm.value.email || '',
+          password: this.loginForm.value.password || '',
+        })
+      );
+  
+      // Assuming the response contains a token (e.g., response.access_token)
+      const token = response.access_token;
+  
+      // Store the token in localStorage
+      localStorage.setItem('access_token', token);
+  
+      const authTokenPayload: { sub: number } = JSON.parse(
+        atob(token.split('.')[1])
+      );
+  
+      // Check if the user is banned
+      const ban = await firstValueFrom(
+        this.bansService.getBanByUserId(authTokenPayload.sub)
+      );
 
-          // Store the token in localStorage
-          localStorage.setItem('access_token', token);
-          const authTokenPayload: { sub: number } = JSON.parse(
-            atob(token.split('.')[1])
-          );
-
-          // Check if the user is banned
-          this.bansService.getBanByUserId(authTokenPayload.sub).subscribe({
-            next: (ban) => {
-              if (ban) {
-                if (ban.id_user === authTokenPayload.sub) {
-                  alert(
-                    'You are banned\nReason: ' +
-                      ban.reason +
-                      '\nDate: ' +
-                      ban.date
-                  );
-                  return;
-                }
-              }
-            },
-          });
-          // Update the ApiModule's Configuration with the new token
-          this.config.credentials['bearer'] = () => token;
-          console.log('User is not banned');
-          this.router.navigate(['/']).then(() => {
-            window.location.reload();
-          });
-        },
-        error: () => {
-          window.alert('Login failed');
-        },
-      });
+      if (ban && ban.id_user === authTokenPayload.sub) {
+        alert(
+          'You are banned\nReason: ' +
+            ban.reason +
+            '\nDate: ' +
+            ban.date
+        );
+        return;
+      }
+  
+      // Update the ApiModule's Configuration with the new token
+      this.config.credentials['bearer'] = () => token;
+      console.log('User is not banned');
+  
+      // Navigate to '/' and reload
+      await this.router.navigate(['/']);
+      window.location.reload();
+    } catch (error) {
+      window.alert('Login failed');
+    }
   }
 }

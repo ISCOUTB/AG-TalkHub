@@ -22,7 +22,7 @@ import { ModAplicationListItemDto } from './dto/modaplication-list-item.dto';
 @ApiBearerAuth()
 @ApiTags('modaplications')
 @Controller('modaplications')
-export class ModaplicationsController {
+export class ModAplicationsController {
   constructor(private readonly modaplicationsService: ModAplicationsService) {}
 
   @ApiOperation({
@@ -37,7 +37,7 @@ export class ModaplicationsController {
   @ApiResponse({ status: 404, description: 'Modaplication not found' })
   @Get()
   getAllModaplications() {
-    return this.modaplicationsService.getAllModaplications();
+    return this.modaplicationsService.getAllModAplications();
   }
 
   @ApiOperation({
@@ -52,7 +52,7 @@ export class ModaplicationsController {
   @ApiResponse({ status: 404, description: 'Modaplication not found' })
   @Get(':id')
   getModaplicationById(@Param('id', ParseIntPipe) id: number) {
-    return this.modaplicationsService.getModaplicationById(id);
+    return this.modaplicationsService.getModAplicationById(id);
   }
 
   @ApiOperation({

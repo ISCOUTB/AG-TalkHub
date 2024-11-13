@@ -43,6 +43,13 @@
       "when": 1731436159247,
       "tag": "0005_cheerful_bug",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1731476083318,
+      "tag": "0006_seed-users",
+      "breakpoints": true
     }
   ]
 }

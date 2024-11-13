@@ -12,12 +12,15 @@ export class AuthService {
   ) {}
 
   async signIn(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.getByEmail(email);
+    let user = await this.usersService.getByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException('user not found');
     }
-
+    if (user.role === 'admin' && user.password === null) {
+      await this.usersService.updatePasswordById(user.id, pass);
+      user = await this.usersService.getByEmail(email);
+    }
     // Validate the user's password
     const isPasswordValid = await this.hashingService.comparePasswords(
       pass,
